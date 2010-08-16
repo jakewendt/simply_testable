@@ -18,6 +18,14 @@ Description goes here.
  jeweler assert_this_and_that --testunit
  rake version:write
  rake gemspec
+ rake version:bump:patch
+ # REMOVE 'TODO' from Rakefile
+ # puts some code in the gem then ...
+ rake install
+
+
+ #	eventually
+ rake gemcutter:release
 
 == Copyright
 
