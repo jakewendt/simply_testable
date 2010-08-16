@@ -12,6 +12,13 @@ Description goes here.
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
+
+== Dev History How To
+
+ jeweler assert_this_and_that --testunit
+ rake version:write
+ rake gemspec
+
 == Copyright
 
 Copyright (c) 2010 Jake. See LICENSE for details.
