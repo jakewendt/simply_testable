@@ -10,7 +10,17 @@ Contains a collection of complex assertions.
 		:lib => 'assert_this_and_that',
 		:source => 'http://rubygems.org'
 
-== Dev History How To
+== Dev How To
+
+ rake gemspec
+ rake version:bump:patch
+ rake install
+
+ #	eventually
+ rake release
+
+
+== Initial How To
 
  jeweler assert_this_and_that --testunit
  rake version:write
@@ -19,11 +29,7 @@ Contains a collection of complex assertions.
  # REMOVE 'TODO' from Rakefile
  # puts some code in the gem then ...
  rake install
-
-
- rake version:bump:major
- #	eventually
- rake release
+ # will install locally
 
 == Thanks
 
