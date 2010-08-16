@@ -6,9 +6,9 @@ Description goes here.
 
 Contains a collection of complex assertions.
 
- 	config.gem 'jakewendt-assert_this_and_that',
-		:lib => 'assert_this_and_that',
-		:source => 'http://rubygems.org'
+ config.gem 'jakewendt-assert_this_and_that',
+   :lib    => 'assert_this_and_that',
+   :source => 'http://rubygems.org'
 
 == Dev How To
 
