@@ -24,8 +24,9 @@ Description goes here.
  rake install
 
 
+ rake version:bump:major
  #	eventually
- rake gemcutter:release
+ rake release
 
 == Thanks
 
