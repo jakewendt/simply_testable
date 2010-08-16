@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jakewendt-assert_this_and_that}
-  s.version = "0.0.1"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jake"]
@@ -23,7 +23,15 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "jakewendt-assert_this_and_that.gemspec",
      "lib/assert_this_and_that.rb",
+     "lib/assert_this_and_that/accessible_via_format.rb",
+     "lib/assert_this_and_that/accessible_via_protocol.rb",
+     "lib/assert_this_and_that/accessible_via_user.rb",
+     "lib/assert_this_and_that/should_act_as_list.rb",
+     "lib/assert_this_and_that/should_have_association.rb",
+     "lib/assert_this_and_that/should_require_association.rb",
+     "lib/assert_this_and_that/should_require_attribute.rb",
      "test/helper.rb",
      "test/test_assert_this_and_that.rb"
   ]

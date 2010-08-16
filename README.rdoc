@@ -27,6 +27,11 @@ Description goes here.
  #	eventually
  rake gemcutter:release
 
+== Thanks
+
+* http://github.com/rails/rails
+* http://github.com/technicalpickles/jeweler
+
 == Copyright
 
 Copyright (c) 2010 Jake. See LICENSE for details.
