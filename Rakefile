@@ -16,7 +16,7 @@ begin
 		# we like to keep our gem slim
 		gem.files = FileList['lib/**/*.rb']
 		gem.test_files = []
-#		gem.add_dependency('chronic', '>= 0.2.3')
+		gem.add_dependency('ssl_requirement', '>= 0.1.0')
 
 
 	end

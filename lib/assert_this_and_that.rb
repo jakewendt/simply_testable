@@ -1,6 +1,7 @@
 #
 #	This may require the addition of other gem requirements
 #
+require 'assert_this_and_that/action_controller/test_case'
 require 'assert_this_and_that/accessible_via_protocol'
 require 'assert_this_and_that/accessible_via_format'
 require 'assert_this_and_that/accessible_via_user'
