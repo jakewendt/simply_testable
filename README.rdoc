@@ -1,4 +1,4 @@
-= assert_this_and_that
+= assert_this_and_that (RubyGem)
 
 Description goes here.
 
@@ -9,6 +9,13 @@ Contains a collection of complex assertions.
  config.gem 'jakewendt-assert_this_and_that',
    :lib    => 'assert_this_and_that',
    :source => 'http://rubygems.org'
+
+== ToDo
+
+* add assert_should_protect_attributes(*attributes)
+* add assert_should_allow_attributes(*attributes)
+* include assert_only_difference
+* add legitimate text to Rakefile
 
 == Dev How To
 
