@@ -14,10 +14,21 @@ module ShouldRequireAttribute
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				test "SR should require unique #{attr}" do
+				title = "SR should require unique #{attr}"
+				scope = user_options[:scope]
+				title << " scope #{scope}" unless scope.blank?
+				test title do
 					o = create_object
 					assert_no_difference "#{model}.count" do
-						object = create_object(attr.to_sym => o.send(attr))
+						attrs = { attr.to_sym => o.send(attr) }
+						if( scope.is_a?(String) || scope.is_a?(Symbol) )
+							attrs[scope.to_sym] = o.send(scope.to_sym)
+						elsif scope.is_a?(Array)
+							scope.each do |s|
+								attrs[s.to_sym] = o.send(s.to_sym)
+							end
+						end 
+						object = create_object(attrs)
 						assert object.errors.on(attr.to_sym)
 					end
 				end
