@@ -16,7 +16,10 @@ module ShouldRequireAttribute
 				attr = attr.to_s
 				title = "SR should require unique #{attr}"
 				scope = user_options[:scope]
-				title << " scope #{scope}" unless scope.blank?
+				unless scope.blank?
+					title << " scope "
+					title << (( scope.is_a?(Array) )?scope.join(','):scope)
+				end
 				test title do
 					o = create_object
 					assert_no_difference "#{model}.count" do
