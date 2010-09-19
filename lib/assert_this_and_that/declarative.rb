@@ -38,7 +38,6 @@ require 'active_support'
 require 'active_support/test_case'
 ActiveSupport::TestCase.send(:include,AssertThisAndThat::Declarative)
 
-require 'rails'
 Rails.backtrace_cleaner.add_silencer {|line|
 #	line =~ /\/test\/.*\.\.\/declarative\.rb:/
 #	Due to my modification, every error is accompanied by 
@@ -54,4 +53,4 @@ Rails.backtrace_cleaner.add_silencer {|line|
 
 #	This doesn't seem to work at all in the plugin engine.
 	line =~ /test.*\/declarative\.rb:/
-} 
+} if defined? Rails 
