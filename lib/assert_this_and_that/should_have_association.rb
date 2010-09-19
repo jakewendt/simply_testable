@@ -1,5 +1,4 @@
-module AssertThisAndThat
-module ShouldHaveAssociation
+module AssertThisAndThat::ShouldHaveAssociation
 
 	def self.included(base)
 		base.extend ClassMethods
@@ -156,8 +155,7 @@ module ShouldHaveAssociation
 		end
 
 	end	# module ClassMethods
-end	# module ShouldHaveAssociation
-end	# module AssertThisAndThat
+end	# module AssertThisAndThat::ShouldHaveAssociation
 require 'active_support'
 require 'active_support/test_case'
 ActiveSupport::TestCase.send(:include,

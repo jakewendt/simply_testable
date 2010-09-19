@@ -1,5 +1,4 @@
-module AssertThisAndThat
-module AccessibleViaProtocol
+module AssertThisAndThat::AccessibleViaProtocol
 
 	def self.included(base)
 		base.extend ClassMethods
@@ -395,10 +394,8 @@ module AccessibleViaProtocol
 		end
 
 	end	# module ClassMethods
-end	# module AccessibleViaProtocol
-end	#	module AssertThisAndThat
+end	#	module AssertThisAndThat::AccessibleViaProtocol
 require 'action_controller'
 require 'action_controller/test_case'
 ActionController::TestCase.send(:include, 
 	AssertThisAndThat::AccessibleViaProtocol)
-

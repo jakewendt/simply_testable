@@ -1,5 +1,4 @@
-module AssertThisAndThat
-module ShouldRequireAttribute
+module AssertThisAndThat::ShouldRequireAttribute
 
 	def self.included(base)
 		base.extend ClassMethods
@@ -60,8 +59,7 @@ module ShouldRequireAttribute
 
 	end
 
-end	# module ShouldRequireAttribute
-end	# module AssertThisAndThat
+end	# module AssertThisAndThat::ShouldRequireAttribute
 require 'active_support'
 require 'active_support/test_case'
 ActiveSupport::TestCase.send(:include,

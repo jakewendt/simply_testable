@@ -1,5 +1,4 @@
-module AssertThisAndThat
-module ActionController
+module AssertThisAndThat::ActionController
 module TestCase
 
 	def turn_https_on
@@ -12,7 +11,8 @@ module TestCase
 	end
 
 end	#	module TestCase
-end	#	module ActionController
-end	#	module AssertThisAndThat
+end	#	module AssertThisAndThat::ActionController
+require 'action_controller'
+require 'action_controller/test_case'
 ActionController::TestCase.send(:include,
 	AssertThisAndThat::ActionController::TestCase)

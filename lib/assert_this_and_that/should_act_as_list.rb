@@ -1,5 +1,4 @@
-module AssertThisAndThat
-module ShouldActAsList
+module AssertThisAndThat::ShouldActAsList
 
 	def self.included(base)
 		base.extend ClassMethods
@@ -35,8 +34,7 @@ module ShouldActAsList
 
 	end
 
-end	# module ShouldActAsList
-end	# module AssertThisAndThat
+end	# module AssertThisAndThat::ShouldActAsList
 require 'active_support'
 require 'active_support/test_case'
 ActiveSupport::TestCase.send(:include,
