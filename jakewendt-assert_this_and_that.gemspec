@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jakewendt-assert_this_and_that}
-  s.version = "1.1.2"
+  s.version = "1.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jake"]
-  s.date = %q{2010-09-10}
+  s.date = %q{2010-09-19}
   s.description = %q{longer description of your gem}
   s.email = %q{github@jake.otherinbox.com}
   s.extra_rdoc_files = [
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
      "lib/assert_this_and_that/accessible_via_protocol.rb",
      "lib/assert_this_and_that/accessible_via_user.rb",
      "lib/assert_this_and_that/action_controller/test_case.rb",
+     "lib/assert_this_and_that/declarative.rb",
      "lib/assert_this_and_that/should_act_as_list.rb",
      "lib/assert_this_and_that/should_have_association.rb",
      "lib/assert_this_and_that/should_require_association.rb",
