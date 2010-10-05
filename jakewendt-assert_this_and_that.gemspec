@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jakewendt-assert_this_and_that}
-  s.version = "1.3.0"
+  s.version = "1.4.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jake"]
-  s.date = %q{2010-09-24}
+  s.date = %q{2010-10-05}
   s.description = %q{longer description of your gem}
   s.email = %q{github@jake.otherinbox.com}
   s.extra_rdoc_files = [
@@ -18,16 +18,17 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     "lib/assert_this_and_that.rb",
-     "lib/assert_this_and_that/accessible_via_format.rb",
-     "lib/assert_this_and_that/accessible_via_protocol.rb",
-     "lib/assert_this_and_that/accessible_via_user.rb",
-     "lib/assert_this_and_that/action_controller/test_case.rb",
-     "lib/assert_this_and_that/declarative.rb",
-     "lib/assert_this_and_that/should_act_as_list.rb",
-     "lib/assert_this_and_that/should_have_association.rb",
-     "lib/assert_this_and_that/should_require_association.rb",
-     "lib/assert_this_and_that/should_require_attribute.rb",
-     "lib/assert_this_and_that/should_route.rb"
+     "lib/assert_this_and_that/action_controller_extension.rb",
+     "lib/assert_this_and_that/action_controller_extension/accessible_via_format.rb",
+     "lib/assert_this_and_that/action_controller_extension/accessible_via_protocol.rb",
+     "lib/assert_this_and_that/action_controller_extension/accessible_via_user.rb",
+     "lib/assert_this_and_that/action_controller_extension/routing.rb",
+     "lib/assert_this_and_that/action_controller_extension/test_case.rb",
+     "lib/assert_this_and_that/acts_as_list.rb",
+     "lib/assert_this_and_that/assertions.rb",
+     "lib/assert_this_and_that/associations.rb",
+     "lib/assert_this_and_that/attributes.rb",
+     "lib/assert_this_and_that/declarative.rb"
   ]
   s.homepage = %q{http://github.com/jakewendt/assert_this_and_that}
   s.rdoc_options = ["--charset=UTF-8"]

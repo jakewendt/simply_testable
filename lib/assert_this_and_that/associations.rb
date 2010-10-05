@@ -176,19 +176,23 @@ module AssertThisAndThat::Associations
 					end
 				end
 
-			  title = "ATnT should require valid association #{assoc}"
+				title = "ATnT should require valid association #{assoc}"
 				title << " as #{user_options[:as]}" if !user_options[:as].blank?
-			  test title do
-			    assert_difference("#{model}.count",0) { 
-			      object = create_object(
+				test title do
+					assert_difference("#{model}.count",0) { 
+						object = create_object(
 							as.to_sym => Factory.build(assoc.to_sym))
-			      assert object.errors.on("#{as}_id".to_sym)
-			    }    
-			  end 
+						assert object.errors.on("#{as}_id".to_sym)
+					}    
+				end 
 
 			end
 
 		end
+		alias_method :assert_should_require_valid_associations,
+			:assert_requires_valid_associations
+		alias_method :assert_should_require_valid_association,
+			:assert_requires_valid_associations
 		alias_method :assert_requires_valid_association,
 			:assert_requires_valid_associations
 		alias_method :assert_requires_valid,

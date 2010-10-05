@@ -70,6 +70,9 @@ module AssertThisAndThat::Attributes
 					assert_difference( "#{model}.count", 1 ) do
 						object = create_object(attr.to_sym => nil)
 						assert !object.errors.on(attr.to_sym)
+						if attr =~ /^(.*)_id$/
+							assert !object.errors.on($1.to_sym)
+						end
 					end
 				end
 			end

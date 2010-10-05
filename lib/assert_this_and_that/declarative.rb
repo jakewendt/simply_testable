@@ -52,5 +52,6 @@ Rails.backtrace_cleaner.add_silencer {|line|
 #     /Users/jakewendt/github_repo/jakewendt/ucb_ccls_clic/vendor/plugins/ucb_ccls_engine/rails/../test/helpers/declarative.rb:21:in `_test_AWiHTTP_should_get_show_with_admin_login_with_verbosity'
 
 #	This doesn't seem to work at all in the plugin engine.
-	line =~ /test.*\/declarative\.rb:/
+#	line =~ /test.*\/declarative\.rb:/
+	line =~ /assert_this_and_that\/declarative\.rb:/
 } if defined? Rails 
