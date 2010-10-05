@@ -81,11 +81,43 @@ module AssertThisAndThat::Attributes
 			:assert_should_not_require_attribute
 
 		def assert_should_protect_attribute(*attributes)
+			user_options = attributes.extract_options!
+			model_name = user_options[:model] || self.name.sub(/Test$/,'')
+			model = model_name.constantize
+			
+			attributes.each do |attr|
+				attr = attr.to_s
+				test "ATnT should protect attribute #{attr}" do
+					assert model.accessible_attributes||model.protected_attributes,
+						"Both accessible and protected attributes are empty"
+					assert !(model.accessible_attributes||[]).include?(attr),
+						"#{attr} is included in accessible attributes"
+					if !model.protected_attributes.nil?
+						assert model.protected_attributes.include?(attr),
+							"#{attr} is not included in protected attributes"
+					end
+				end
+			end
 		end
 		alias_method :assert_should_protect_attributes, 
 			:assert_should_protect_attribute
 
 		def assert_should_not_protect_attribute(*attributes)
+			user_options = attributes.extract_options!
+			model_name = user_options[:model] || self.name.sub(/Test$/,'')
+			model = model_name.constantize
+			
+			attributes.each do |attr|
+				attr = attr.to_s
+				test "ATnT should not protect attribute #{attr}" do
+					assert !(model.protected_attributes||[]).include?(attr),
+						"#{attr} is included in protected attributes"
+					if !model.accessible_attributes.nil?
+						assert model.accessible_attributes.include?(attr),
+							"#{attr} is not included in accessible attributes"
+					end
+				end
+			end
 		end
 		alias_method :assert_should_not_protect_attributes, 
 			:assert_should_not_protect_attribute
