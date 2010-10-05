@@ -1,4 +1,4 @@
-module AssertThisAndThat::ShouldRequireAttribute
+module AssertThisAndThat::Attributes
 
 	def self.included(base)
 		base.extend ClassMethods
@@ -13,7 +13,7 @@ module AssertThisAndThat::ShouldRequireAttribute
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				title = "SR should require unique #{attr}"
+				title = "ATnT should require unique #{attr}"
 				scope = user_options[:scope]
 				unless scope.blank?
 					title << " scope "
@@ -36,6 +36,10 @@ module AssertThisAndThat::ShouldRequireAttribute
 				end
 			end
 		end
+		alias_method :assert_should_require_unique_attributes, 
+			:assert_should_require_unique_attribute
+		alias_method :assert_should_require_unique, 
+			:assert_should_require_unique_attribute
 
 		def assert_should_require_attribute(*attributes)
 			user_options = attributes.extract_options!
@@ -43,7 +47,7 @@ module AssertThisAndThat::ShouldRequireAttribute
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				test "SR should require #{attr}" do
+				test "ATnT should require #{attr}" do
 					assert_no_difference "#{model}.count" do
 						object = create_object(attr.to_sym => nil)
 						assert object.errors.on(attr.to_sym)
@@ -51,16 +55,42 @@ module AssertThisAndThat::ShouldRequireAttribute
 				end
 			end
 		end
-
+		alias_method :assert_should_require_attributes, 
+			:assert_should_require_attribute
 		alias_method :assert_should_require, 
 			:assert_should_require_attribute
-		alias_method :assert_should_require_unique, 
-			:assert_should_require_unique_attribute
+
+		def assert_should_not_require_attribute(*attributes)
+			user_options = attributes.extract_options!
+			model = user_options[:model] || self.name.sub(/Test$/,'')
+			
+			attributes.each do |attr|
+				attr = attr.to_s
+				test "ATnT should not require #{attr}" do
+					assert_difference( "#{model}.count", 1 ) do
+						object = create_object(attr.to_sym => nil)
+						assert !object.errors.on(attr.to_sym)
+					end
+				end
+			end
+		end
+		alias_method :assert_should_not_require_attributes, 
+			:assert_should_not_require_attribute
+
+		def assert_should_protect_attribute(*attributes)
+		end
+		alias_method :assert_should_protect_attributes, 
+			:assert_should_protect_attribute
+
+		def assert_should_not_protect_attribute(*attributes)
+		end
+		alias_method :assert_should_not_protect_attributes, 
+			:assert_should_not_protect_attribute
 
 	end
 
-end	# module AssertThisAndThat::ShouldRequireAttribute
+end	# module AssertThisAndThat::Attributes
 require 'active_support'
 require 'active_support/test_case'
 ActiveSupport::TestCase.send(:include,
-	AssertThisAndThat::ShouldRequireAttribute)
+	AssertThisAndThat::Attributes)

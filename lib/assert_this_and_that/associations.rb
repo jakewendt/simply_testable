@@ -1,4 +1,4 @@
-module AssertThisAndThat::ShouldHaveAssociation
+module AssertThisAndThat::Associations
 
 	def self.included(base)
 		base.extend ClassMethods
@@ -14,7 +14,7 @@ module AssertThisAndThat::ShouldHaveAssociation
 			associations.each do |assoc|
 				class_name = ( assoc = assoc.to_s ).camelize
 
-				title = "SA should initially belong to #{assoc}"
+				title = "ATnT should initially belong to #{assoc}"
 				if !user_options[:class_name].blank?
 					title << " ( #{user_options[:class_name]} )"
 					class_name = user_options[:class_name].to_s
@@ -42,7 +42,7 @@ module AssertThisAndThat::ShouldHaveAssociation
 			
 			associations.each do |assoc|
 				class_name = ( assoc = assoc.to_s ).camelize
-				title = "SA should belong to #{assoc}" 
+				title = "ATnT should belong to #{assoc}" 
 #				if !user_options[:as].blank?
 #					title << " as #{user_options[:as]}"
 #					as = user_options[:as]
@@ -70,7 +70,7 @@ module AssertThisAndThat::ShouldHaveAssociation
 			associations.each do |assoc|
 				assoc = assoc.to_s
 
-				test "SA should have one #{assoc}" do
+				test "ATnT should have one #{assoc}" do
 					object = create_object
 					assert_nil object.send(assoc)
 					Factory(assoc, "#{model.underscore}_id".to_sym => object.id)
@@ -96,7 +96,7 @@ module AssertThisAndThat::ShouldHaveAssociation
 			associations.each do |assoc|
 				class_name = ( assoc = assoc.to_s ).camelize
 
-				title = "SA should have many #{assoc}"
+				title = "ATnT should have many #{assoc}"
 				if !user_options[:class_name].blank?
 					title << " ( #{user_options[:class_name]} )"
 					class_name = user_options[:class_name].to_s
@@ -135,7 +135,7 @@ module AssertThisAndThat::ShouldHaveAssociation
 			associations.each do |assoc|
 				assoc = assoc.to_s
 
-				test "SA should habtm #{assoc}" do
+				test "ATnT should habtm #{assoc}" do
 					object = create_object
 					assert_equal 0, object.send(assoc).length
 					object.send(assoc) << Factory(assoc.singularize)
@@ -154,9 +154,50 @@ module AssertThisAndThat::ShouldHaveAssociation
 
 		end
 
-	end	# module ClassMethods
-end	# module AssertThisAndThat::ShouldHaveAssociation
+		def assert_requires_valid_associations(*associations)
+			user_options = associations.extract_options!
+			model = user_options[:model] || self.name.sub(/Test$/,'')
+
+			associations.each do |assoc|
+				as = assoc = assoc.to_s
+				as = user_options[:as] if !user_options[:as].blank?
+
+				test "ATnT should require foreign key #{as}_id" do
+					assert_difference("#{model}.count",0) do
+						object = create_object("#{as}_id".to_sym => nil)
+						assert object.errors.on(as.to_sym)
+					end
+				end
+
+				test "ATnT should require valid foreign key #{as}_id" do
+					assert_difference("#{model}.count",0) do
+						object = create_object("#{as}_id".to_sym => 0)
+						assert object.errors.on(as.to_sym)
+					end
+				end
+
+			  title = "ATnT should require valid association #{assoc}"
+				title << " as #{user_options[:as]}" if !user_options[:as].blank?
+			  test title do
+			    assert_difference("#{model}.count",0) { 
+			      object = create_object(
+							as.to_sym => Factory.build(assoc.to_sym))
+			      assert object.errors.on("#{as}_id".to_sym)
+			    }    
+			  end 
+
+			end
+
+		end
+		alias_method :assert_requires_valid_association,
+			:assert_requires_valid_associations
+		alias_method :assert_requires_valid,
+			:assert_requires_valid_associations
+
+	end	# ClassMethods
+
+end	# module AssertThisAndThat::Associations
 require 'active_support'
 require 'active_support/test_case'
 ActiveSupport::TestCase.send(:include,
-	AssertThisAndThat::ShouldHaveAssociation)
+	AssertThisAndThat::Associations)

@@ -1,4 +1,4 @@
-module AssertThisAndThat::ShouldActAsList
+module AssertThisAndThat::ActsAsList
 
 	def self.included(base)
 		base.extend ClassMethods
@@ -11,7 +11,7 @@ module AssertThisAndThat::ShouldActAsList
 			options = args.extract_options!
 			scope = options[:scope]
 
-			test "should act as list" do
+			test "ATnT should act as list" do
 				model = create_object.class.name
 				model.constantize.destroy_all
 				object = create_object
@@ -34,8 +34,8 @@ module AssertThisAndThat::ShouldActAsList
 
 	end
 
-end	# module AssertThisAndThat::ShouldActAsList
+end	# module AssertThisAndThat::ActsAsList
 require 'active_support'
 require 'active_support/test_case'
 ActiveSupport::TestCase.send(:include,
-	AssertThisAndThat::ShouldActAsList)
+	AssertThisAndThat::ActsAsList)

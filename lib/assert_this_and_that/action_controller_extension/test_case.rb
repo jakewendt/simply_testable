@@ -1,4 +1,4 @@
-module AssertThisAndThat::ActionController
+module AssertThisAndThat::ActionControllerExtension
 module TestCase
 
 	def turn_https_on
@@ -10,9 +10,14 @@ module TestCase
 		@request.env['HTTPS'] = nil
 	end
 
+	def assert_layout(layout)
+		layout = "layouts/#{layout}" unless layout.match(/^layouts/)
+		assert_equal layout, @response.layout
+	end
+
 end	#	module TestCase
-end	#	module AssertThisAndThat::ActionController
+end	#	module AssertThisAndThat::ActionControllerExtension
 require 'action_controller'
 require 'action_controller/test_case'
 ActionController::TestCase.send(:include,
-	AssertThisAndThat::ActionController::TestCase)
+	AssertThisAndThat::ActionControllerExtension::TestCase)

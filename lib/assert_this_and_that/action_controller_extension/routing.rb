@@ -1,10 +1,14 @@
-module AssertThisAndThat::ShouldRoute
+module AssertThisAndThat::ActionControllerExtension
+module Routing
 
 	def self.included(base)
 		base.extend ClassMethods
 	end
 
 	module ClassMethods
+
+#		def assert_route
+#		end
 
 		def assert_no_route(verb,action,args={})
 			test "NR no route to #{verb} #{action} #{args}" do
@@ -15,8 +19,9 @@ module AssertThisAndThat::ShouldRoute
 		end
 
 	end	# module ClassMethods
-end	#	module AssertThisAndThat::ShouldRoute
+end	#	module Routing
+end	#	module AssertThisAndThat::ActionControllerExtension
 require 'action_controller'
 require 'action_controller/test_case'
 ActionController::TestCase.send(:include, 
-	AssertThisAndThat::ShouldRoute)
+	AssertThisAndThat::ActionControllerExtension::Routing)
