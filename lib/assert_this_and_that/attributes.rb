@@ -13,7 +13,7 @@ module AssertThisAndThat::Attributes
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				title = "ATnT should require unique #{attr}"
+				title = "@@ should require unique #{attr}"
 				scope = user_options[:scope]
 				unless scope.blank?
 					title << " scope "
@@ -47,7 +47,7 @@ module AssertThisAndThat::Attributes
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				test "ATnT should require #{attr}" do
+				test "@@ should require #{attr}" do
 					assert_no_difference "#{model}.count" do
 						object = create_object(attr.to_sym => nil)
 						assert object.errors.on(attr.to_sym)
@@ -66,7 +66,7 @@ module AssertThisAndThat::Attributes
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				test "ATnT should not require #{attr}" do
+				test "@@ should not require #{attr}" do
 					assert_difference( "#{model}.count", 1 ) do
 						object = create_object(attr.to_sym => nil)
 						assert !object.errors.on(attr.to_sym)
@@ -87,7 +87,7 @@ module AssertThisAndThat::Attributes
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				test "ATnT should protect attribute #{attr}" do
+				test "@@ should protect attribute #{attr}" do
 					assert model.accessible_attributes||model.protected_attributes,
 						"Both accessible and protected attributes are empty"
 					assert !(model.accessible_attributes||[]).include?(attr),
@@ -109,7 +109,7 @@ module AssertThisAndThat::Attributes
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				test "ATnT should not protect attribute #{attr}" do
+				test "@@ should not protect attribute #{attr}" do
 					assert !(model.protected_attributes||[]).include?(attr),
 						"#{attr} is included in protected attributes"
 					if !model.accessible_attributes.nil?
