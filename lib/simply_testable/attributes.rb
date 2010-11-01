@@ -55,6 +55,8 @@ module SimplyTestable::Attributes
 				end
 			end
 		end
+		alias_method :assert_should_require_attributes_not_nil,
+			:assert_should_require_attribute_not_nil
 
 		def assert_should_require_attribute(*attributes)
 			user_options = attributes.extract_options!
