@@ -1,83 +1,56 @@
 class PostsController < ApplicationController
-  # GET /posts
-  # GET /posts.xml
-  def index
-    @posts = Post.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @posts }
-    end
-  end
+	before_filter :require_blog_id,
+		:only => [ :new, :create, :index ]
 
-  # GET /posts/1
-  # GET /posts/1.xml
-  def show
-    @post = Post.find(params[:id])
+	def index
+		@posts = Post.all
+	end
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @post }
-    end
-  end
+	def show
+		@post = Post.find(params[:id])
+	end
 
-  # GET /posts/new
-  # GET /posts/new.xml
-  def new
-    @post = Post.new
+	def new
+		@post = Post.new
+	end
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @post }
-    end
-  end
+	def edit
+		@post = Post.find(params[:id])
+	end
 
-  # GET /posts/1/edit
-  def edit
-    @post = Post.find(params[:id])
-  end
+	def create
+		@post = Post.new(params[:post])
+		if @post.save
+			redirect_to(@post, :notice => 'Post was successfully created.')
+		else
+			render :action => "new"
+		end
+	end
 
-  # POST /posts
-  # POST /posts.xml
-  def create
-    @post = Post.new(params[:post])
+	def update
+		@post = Post.find(params[:id])
+		if @post.update_attributes(params[:post])
+			redirect_to(@post, :notice => 'Post was successfully updated.')
+		else
+			render :action => "edit"
+		end
+	end
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to(@post, :notice => 'Post was successfully created.') }
-        format.xml  { render :xml => @post, :status => :created, :location => @post }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
+	def destroy
+		@post = Post.find(params[:id])
+		@post.destroy
+		redirect_to(blog_posts_url(@post.blog))
+	end
 
-  # PUT /posts/1
-  # PUT /posts/1.xml
-  def update
-    @post = Post.find(params[:id])
+protected
 
-    respond_to do |format|
-      if @post.update_attributes(params[:post])
-        format.html { redirect_to(@post, :notice => 'Post was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
+	def require_blog_id
+		if !params[:blog_id].blank? and Blog.exists?(params[:blog_id])
+			@blog = Blog.find(params[:blog_id])
+		else
+			access_denied("Valid blog id required!", root_path)
+		end
+	end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.xml
-  def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(posts_url) }
-      format.xml  { head :ok }
-    end
-  end
 end

@@ -9,6 +9,18 @@ class ActiveSupport::TestCase
 	self.use_instantiated_fixtures  = false
 	fixtures :all
 
+	def new_blog(options={})
+		Blog.new({
+			:title => "Fixed Title"
+		}.merge(options))
+	end
+
+	def create_blog(options={})
+		p = new_blog(options)
+		p.save
+		p
+	end
+
 	def new_post(options={})
 		Post.new({
 			:title => "Fixed Title"

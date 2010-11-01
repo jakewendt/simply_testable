@@ -1,45 +1,58 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:posts)
-  end
+	test "should get index" do
+		blog = create_blog
+		get :index, :blog_id => blog.id
+		assert_response :success
+		assert_not_nil assigns(:posts)
+	end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
+	test "should get new" do
+		blog = create_blog
+		get :new, :blog_id => blog.id
+		assert_response :success
+	end
 
-  test "should create post" do
-    assert_difference('Post.count') do
-      post :create, :post => new_post.attributes
-    end
+	test "should create post" do
+		blog = create_blog
+		assert_difference('Post.count') do
+			post :create, :post => new_post.attributes, :blog_id => blog.id
+		end
+		assert_redirected_to post_path(assigns(:post))
+	end
 
-    assert_redirected_to post_path(assigns(:post))
-  end
+	test "should show post" do
+		blog = create_blog
+		post = create_post
+		blog.posts << post
+		get :show, :id => post.id
+		assert_response :success
+	end
 
-  test "should show post" do
-    get :show, :id => posts(:one).to_param
-    assert_response :success
-  end
+	test "should get edit" do
+		blog = create_blog
+		post = create_post
+		blog.posts << post
+		get :edit, :id => post.id
+		assert_response :success
+	end
 
-  test "should get edit" do
-    get :edit, :id => posts(:one).to_param
-    assert_response :success
-  end
+	test "should update post" do
+		blog = create_blog
+		post = create_post
+		blog.posts << post
+		put :update, :id => post.id, :post => new_post.attributes
+		assert_redirected_to post_path(assigns(:post))
+	end
 
-  test "should update post" do
-    put :update, :id => posts(:one).to_param, :post => { }
-    assert_redirected_to post_path(assigns(:post))
-  end
-
-  test "should destroy post" do
-    assert_difference('Post.count', -1) do
-      delete :destroy, :id => posts(:one).to_param
-    end
-
-    assert_redirected_to posts_path
-  end
+	test "should destroy post" do
+		blog = create_blog
+		post = create_post
+		blog.posts << post
+		assert_difference('Post.count', -1) do
+			delete :destroy, :id => post.id
+		end
+		assert_redirected_to blog_posts_path(blog)
+	end
 end
