@@ -17,26 +17,20 @@ Contains a collection of complex assertions.
 * include assert_only_difference
 * add legitimate text to Rakefile
 
-== Dev How To
+== Gemified with Jeweler
+
+ vi Rakefile
+ rake version:write
+
+ rake version:bump:patch
+ rake version:bump:minor
+ rake version:bump:major
 
  rake gemspec
- rake version:bump:patch
- rake install
 
- #	eventually
+ rake install
  rake release
 
-
-== Initial How To
-
- jeweler simply_testable --testunit
- rake version:write
- rake gemspec
- rake version:bump:patch
- # REMOVE 'TODO' from Rakefile
- # puts some code in the gem then ...
- rake install
- # will install locally
 
 == Thanks
 
