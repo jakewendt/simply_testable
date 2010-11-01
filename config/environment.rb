@@ -17,8 +17,8 @@ Rails::Initializer.run do |config|
 
 	config.frameworks -= [:active_resource]
 
-#	config.routes_configuration_file = File.expand_path(
-#		File.join(File.dirname(__FILE__),'..','test/config/routes.rb'))
+	config.routes_configuration_file = File.expand_path(
+		File.join(File.dirname(__FILE__),'..','test/config/routes.rb'))
 
 	config.autoload_paths += [
 		File.expand_path(
