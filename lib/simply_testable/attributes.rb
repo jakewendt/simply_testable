@@ -41,6 +41,21 @@ module SimplyTestable::Attributes
 		alias_method :assert_should_require_unique, 
 			:assert_should_require_unique_attribute
 
+		def assert_should_require_attribute_not_nil(*attributes)
+			user_options = attributes.extract_options!
+			model = user_options[:model] || self.name.sub(/Test$/,'')
+			
+			attributes.each do |attr|
+				attr = attr.to_s
+				test "@@ should require #{attr} not nil" do
+					assert_no_difference "#{model}.count" do
+						object = create_object(attr.to_sym => nil)
+						assert object.errors.on(attr.to_sym)
+					end
+				end
+			end
+		end
+
 		def assert_should_require_attribute(*attributes)
 			user_options = attributes.extract_options!
 			model = user_options[:model] || self.name.sub(/Test$/,'')
