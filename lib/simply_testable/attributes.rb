@@ -31,7 +31,7 @@ module SimplyTestable::Attributes
 							end
 						end 
 						object = create_object(attrs)
-						assert object.errors.on(attr.to_sym)
+						assert object.errors.on_attr_and_type(attr.to_sym, :taken)
 					end
 				end
 			end
@@ -50,7 +50,7 @@ module SimplyTestable::Attributes
 				test "@@ should require #{attr}" do
 					assert_no_difference "#{model}.count" do
 						object = create_object(attr.to_sym => nil)
-						assert object.errors.on(attr.to_sym)
+						assert object.errors.on_attr_and_type(attr.to_sym, :blank)
 					end
 				end
 			end
