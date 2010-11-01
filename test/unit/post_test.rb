@@ -4,8 +4,9 @@ class PostTest < ActiveSupport::TestCase
 
 	assert_should_act_as_list( :scope => :blog_id )
 	assert_should_require_attributes( :title )
-	assert_should_not_require_attributes(
-		:body)
+	assert_should_require_attribute_length( :title,
+		:maximum => 250 )
+	assert_should_not_require_attributes( :body)
 
 #	assert_requires_valid_associations(:address_type)
 #	assert_should_have_one(:addressing)

@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jakewendt-simply_testable}
-  s.version = "1.5.0"
+  s.version = "1.5.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jake"]
@@ -28,7 +28,8 @@ Gem::Specification.new do |s|
      "lib/simply_testable/assertions.rb",
      "lib/simply_testable/associations.rb",
      "lib/simply_testable/attributes.rb",
-     "lib/simply_testable/declarative.rb"
+     "lib/simply_testable/declarative.rb",
+     "lib/simply_testable/errors.rb"
   ]
   s.homepage = %q{http://github.com/jakewendt/simply_testable}
   s.rdoc_options = ["--charset=UTF-8"]

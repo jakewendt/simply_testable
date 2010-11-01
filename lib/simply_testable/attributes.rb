@@ -50,7 +50,8 @@ module SimplyTestable::Attributes
 				test "@@ should require #{attr}" do
 					assert_no_difference "#{model}.count" do
 						object = create_object(attr.to_sym => nil)
-						assert object.errors.on_attr_and_type(attr.to_sym, :blank)
+						assert object.errors.on_attr_and_type(attr.to_sym, :blank) ||
+							object.errors.on_attr_and_type(attr.to_sym, :too_short)
 					end
 				end
 			end
@@ -79,6 +80,39 @@ module SimplyTestable::Attributes
 		end
 		alias_method :assert_should_not_require_attributes, 
 			:assert_should_not_require_attribute
+
+		def assert_should_require_attribute_length(*attributes)
+			user_options = attributes.extract_options!
+			model = user_options[:model] || self.name.sub(/Test$/,'')
+			
+			attributes.each do |attr|
+				attr = attr.to_s
+				if user_options.keys.include?(:minimum)
+					min = user_options[:minimum]
+					test "@@ should require min length of #{min} for #{attr}" do
+						assert_no_difference "#{model}.count" do
+							value = 'x'*(min-1)
+							object = create_object(attr.to_sym => value)
+							assert_equal min-1, object.send(attr.to_sym).length
+							assert_equal object.send(attr.to_sym), value
+							assert object.errors.on_attr_and_type(attr.to_sym, :too_short)
+						end
+					end
+				end
+				if user_options.keys.include?(:maximum)
+					max = user_options[:maximum]
+					test "@@ should require max length of #{max} for #{attr}" do
+						assert_no_difference "#{model}.count" do
+							value = 'x'*(max+1)
+							object = create_object(attr.to_sym => value)
+							assert_equal max+1, object.send(attr.to_sym).length
+							assert_equal object.send(attr.to_sym), value
+							assert object.errors.on_attr_and_type(attr.to_sym, :too_long)
+						end
+					end
+				end
+			end
+		end
 
 		def assert_should_protect_attribute(*attributes)
 			user_options = attributes.extract_options!
