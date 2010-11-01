@@ -11,6 +11,9 @@ Rails::Initializer.run do |config|
 	config.gem 'ryanb-acts-as-list',
 		:lib => 'acts_as_list'
 
+	config.gem 'thoughtbot-factory_girl',
+		:lib => 'factory_girl'
+
 	config.plugin_paths = [
 		File.expand_path(File.join(File.dirname(__FILE__),'../..')),
 		File.expand_path(File.join(File.dirname(__FILE__),'../../..','peter'))

@@ -10,9 +10,10 @@ class ActiveSupport::TestCase
 	fixtures :all
 
 	def new_blog(options={})
-		Blog.new({
-			:title => "Fixed Title"
-		}.merge(options))
+#		Blog.new({
+#			:title => "Fixed Title"
+#		}.merge(options))
+		Factory.build(:blog,options)
 	end
 
 	def create_blog(options={})
@@ -22,9 +23,11 @@ class ActiveSupport::TestCase
 	end
 
 	def new_post(options={})
-		Post.new({
-			:title => "Fixed Title"
-		}.merge(options))
+#		Post.new({
+#			:blog_id => create_blog.id,
+#			:title => "Fixed Title"
+#		}.merge(options))
+		Factory.build(:post,options)
 	end
 
 	def create_post(options={})

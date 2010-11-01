@@ -1,7 +1,7 @@
 class CreateBlogs < ActiveRecord::Migration
 	def self.up
 		create_table :blogs do |t|
-			t.integer :posts_count
+			t.integer :posts_count, :default => 0
 			t.string :title
 			t.timestamps
 		end

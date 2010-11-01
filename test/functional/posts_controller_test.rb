@@ -23,36 +23,28 @@ class PostsControllerTest < ActionController::TestCase
 	end
 
 	test "should show post" do
-		blog = create_blog
 		post = create_post
-		blog.posts << post
 		get :show, :id => post.id
 		assert_response :success
 	end
 
 	test "should get edit" do
-		blog = create_blog
 		post = create_post
-		blog.posts << post
 		get :edit, :id => post.id
 		assert_response :success
 	end
 
 	test "should update post" do
-		blog = create_blog
 		post = create_post
-		blog.posts << post
 		put :update, :id => post.id, :post => new_post.attributes
 		assert_redirected_to post_path(assigns(:post))
 	end
 
 	test "should destroy post" do
-		blog = create_blog
 		post = create_post
-		blog.posts << post
 		assert_difference('Post.count', -1) do
 			delete :destroy, :id => post.id
 		end
-		assert_redirected_to blog_posts_path(blog)
+		assert_redirected_to blog_posts_path(post.blog)
 	end
 end
