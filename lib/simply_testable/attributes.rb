@@ -1,4 +1,4 @@
-module AssertThisAndThat::Attributes
+module SimplyTestable::Attributes
 
 	def self.included(base)
 		base.extend ClassMethods
@@ -124,8 +124,8 @@ module AssertThisAndThat::Attributes
 
 	end
 
-end	# module AssertThisAndThat::Attributes
+end	# module SimplyTestable::Attributes
 require 'active_support'
 require 'active_support/test_case'
 ActiveSupport::TestCase.send(:include,
-	AssertThisAndThat::Attributes)
+	SimplyTestable::Attributes)

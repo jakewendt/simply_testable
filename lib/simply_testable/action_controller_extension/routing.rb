@@ -1,4 +1,4 @@
-module AssertThisAndThat::ActionControllerExtension
+module SimplyTestable::ActionControllerExtension
 module Routing
 
 	def self.included(base)
@@ -20,8 +20,8 @@ module Routing
 
 	end	# module ClassMethods
 end	#	module Routing
-end	#	module AssertThisAndThat::ActionControllerExtension
+end	#	module SimplyTestable::ActionControllerExtension
 require 'action_controller'
 require 'action_controller/test_case'
 ActionController::TestCase.send(:include, 
-	AssertThisAndThat::ActionControllerExtension::Routing)
+	SimplyTestable::ActionControllerExtension::Routing)

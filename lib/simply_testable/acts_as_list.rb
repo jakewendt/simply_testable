@@ -1,4 +1,4 @@
-module AssertThisAndThat::ActsAsList
+module SimplyTestable::ActsAsList
 
 	def self.included(base)
 		base.extend ClassMethods
@@ -34,8 +34,8 @@ module AssertThisAndThat::ActsAsList
 
 	end
 
-end	# module AssertThisAndThat::ActsAsList
+end	# module SimplyTestable::ActsAsList
 require 'active_support'
 require 'active_support/test_case'
 ActiveSupport::TestCase.send(:include,
-	AssertThisAndThat::ActsAsList)
+	SimplyTestable::ActsAsList)

@@ -4,11 +4,11 @@ require 'rake'
 begin
 	require 'jeweler'
 	Jeweler::Tasks.new do |gem|
-		gem.name = "jakewendt-assert_this_and_that"
+		gem.name = "jakewendt-simply_testable"
 		gem.summary = %Q{one-line summary of your gem}
 		gem.description = %Q{longer description of your gem}
 		gem.email = "github@jake.otherinbox.com"
-		gem.homepage = "http://github.com/jakewendt/assert_this_and_that"
+		gem.homepage = "http://github.com/jakewendt/simply_testable"
 		gem.authors = ["Jake"]
 		# gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
 
@@ -54,7 +54,7 @@ Rake::RDocTask.new do |rdoc|
 	version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
 	rdoc.rdoc_dir = 'rdoc'
-	rdoc.title = "assert_this_and_that #{version}"
+	rdoc.title = "simply_testable #{version}"
 	rdoc.rdoc_files.include('README*')
 	rdoc.rdoc_files.include('lib/**/*.rb')
 end

@@ -1,4 +1,0 @@
-module AssertThisAndThat::ActionControllerExtension
-module AccessibleViaFormat
-end
-end

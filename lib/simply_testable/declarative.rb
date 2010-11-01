@@ -1,4 +1,4 @@
-module AssertThisAndThat::Declarative
+module SimplyTestable::Declarative
 
 	def self.included(base)
 		base.extend ClassMethods
@@ -36,7 +36,7 @@ module AssertThisAndThat::Declarative
 end
 require 'active_support'
 require 'active_support/test_case'
-ActiveSupport::TestCase.send(:include,AssertThisAndThat::Declarative)
+ActiveSupport::TestCase.send(:include,SimplyTestable::Declarative)
 
 Rails.backtrace_cleaner.add_silencer {|line|
 #	line =~ /\/test\/.*\.\.\/declarative\.rb:/

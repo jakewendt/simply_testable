@@ -1,4 +1,4 @@
-module AssertThisAndThat::Associations
+module SimplyTestable::Associations
 
 	def self.included(base)
 		base.extend ClassMethods
@@ -200,8 +200,8 @@ module AssertThisAndThat::Associations
 
 	end	# ClassMethods
 
-end	# module AssertThisAndThat::Associations
+end	# module SimplyTestable::Associations
 require 'active_support'
 require 'active_support/test_case'
 ActiveSupport::TestCase.send(:include,
-	AssertThisAndThat::Associations)
+	SimplyTestable::Associations)

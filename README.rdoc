@@ -1,4 +1,4 @@
-= assert_this_and_that (RubyGem)
+= Simply Testable (RubyGem)
 
 Description goes here.
 
@@ -6,8 +6,8 @@ Description goes here.
 
 Contains a collection of complex assertions.
 
- config.gem 'jakewendt-assert_this_and_that',
-   :lib    => 'assert_this_and_that',
+ config.gem 'jakewendt-simply_testable',
+   :lib    => 'simply_testable',
    :source => 'http://rubygems.org'
 
 == ToDo
@@ -29,7 +29,7 @@ Contains a collection of complex assertions.
 
 == Initial How To
 
- jeweler assert_this_and_that --testunit
+ jeweler simply_testable --testunit
  rake version:write
  rake gemspec
  rake version:bump:patch
