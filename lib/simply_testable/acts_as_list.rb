@@ -11,7 +11,7 @@ module SimplyTestable::ActsAsList
 			options = args.extract_options!
 			scope = options[:scope]
 
-			test "@@ should act as list" do
+			test "#{BRAND}should act as list" do
 				model = create_object.class.name
 				model.constantize.destroy_all
 				object = create_object

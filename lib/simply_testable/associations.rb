@@ -14,7 +14,7 @@ module SimplyTestable::Associations
 			associations.each do |assoc|
 				class_name = ( assoc = assoc.to_s ).camelize
 
-				title = "@@ should initially belong to #{assoc}"
+				title = "#{BRAND}should initially belong to #{assoc}"
 				if !user_options[:class_name].blank?
 					title << " ( #{user_options[:class_name]} )"
 					class_name = user_options[:class_name].to_s
@@ -42,7 +42,7 @@ module SimplyTestable::Associations
 			
 			associations.each do |assoc|
 				class_name = ( assoc = assoc.to_s ).camelize
-				title = "@@ should belong to #{assoc}" 
+				title = "#{BRAND}should belong to #{assoc}" 
 #				if !user_options[:as].blank?
 #					title << " as #{user_options[:as]}"
 #					as = user_options[:as]
@@ -70,7 +70,7 @@ module SimplyTestable::Associations
 			associations.each do |assoc|
 				assoc = assoc.to_s
 
-				test "@@ should have one #{assoc}" do
+				test "#{BRAND}should have one #{assoc}" do
 					object = create_object
 					assert_nil object.send(assoc)
 					Factory(assoc, "#{model.underscore}_id".to_sym => object.id)
@@ -96,7 +96,7 @@ module SimplyTestable::Associations
 			associations.each do |assoc|
 				class_name = ( assoc = assoc.to_s ).camelize
 
-				title = "@@ should have many #{assoc}"
+				title = "#{BRAND}should have many #{assoc}"
 				if !user_options[:class_name].blank?
 					title << " ( #{user_options[:class_name]} )"
 					class_name = user_options[:class_name].to_s
@@ -135,7 +135,7 @@ module SimplyTestable::Associations
 			associations.each do |assoc|
 				assoc = assoc.to_s
 
-				test "@@ should habtm #{assoc}" do
+				test "#{BRAND}should habtm #{assoc}" do
 					object = create_object
 					assert_equal 0, object.send(assoc).length
 					object.send(assoc) << Factory(assoc.singularize)
@@ -162,21 +162,21 @@ module SimplyTestable::Associations
 				as = assoc = assoc.to_s
 				as = user_options[:as] if !user_options[:as].blank?
 
-				test "@@ should require foreign key #{as}_id" do
+				test "#{BRAND}should require foreign key #{as}_id" do
 					assert_difference("#{model}.count",0) do
 						object = create_object("#{as}_id".to_sym => nil)
 						assert object.errors.on(as.to_sym)
 					end
 				end
 
-				test "@@ should require valid foreign key #{as}_id" do
+				test "#{BRAND}should require valid foreign key #{as}_id" do
 					assert_difference("#{model}.count",0) do
 						object = create_object("#{as}_id".to_sym => 0)
 						assert object.errors.on(as.to_sym)
 					end
 				end
 
-				title = "@@ should require valid association #{assoc}"
+				title = "#{BRAND}should require valid association #{assoc}"
 				title << " as #{user_options[:as]}" if !user_options[:as].blank?
 				test title do
 					assert_difference("#{model}.count",0) { 

@@ -25,7 +25,7 @@ module AccessibleViaProtocol
 
 			m_key = options[:model].try(:underscore).try(:to_sym)
 
-			test "AWiHTTP should get new #{awihttp_title(options)}" do
+			test "#{BRAND}AWiHTTP should get new #{awihttp_title(options)}" do
 				turn_https_off
 				login_as send(options[:login])
 				args = options[:new] || {}
@@ -36,7 +36,7 @@ module AccessibleViaProtocol
 				assert_nil flash[:error]
 			end if actions.include?(:new) || options.keys.include?(:new)
 
-			test "AWiHTTP should post create #{awihttp_title(options)}" do
+			test "#{BRAND}AWiHTTP should post create #{awihttp_title(options)}" do
 				turn_https_off
 				login_as send(options[:login])
 				args = if options[:create]
@@ -53,7 +53,7 @@ module AccessibleViaProtocol
 				assert_nil flash[:error]
 			end if actions.include?(:create) || options.keys.include?(:create)
 
-			test "AWiHTTP should get edit #{awihttp_title(options)}" do
+			test "#{BRAND}AWiHTTP should get edit #{awihttp_title(options)}" do
 				turn_https_off
 				login_as send(options[:login])
 				args={}
@@ -68,7 +68,7 @@ module AccessibleViaProtocol
 				assert_nil flash[:error]
 			end if actions.include?(:edit) || options.keys.include?(:edit)
 
-			test "AWiHTTP should put update #{awihttp_title(options)}" do
+			test "#{BRAND}AWiHTTP should put update #{awihttp_title(options)}" do
 				turn_https_off
 				login_as send(options[:login])
 				args={}
@@ -86,7 +86,7 @@ module AccessibleViaProtocol
 				assert_nil flash[:error]
 			end if actions.include?(:update) || options.keys.include?(:update)
 
-			test "AWiHTTP should get show #{awihttp_title(options)}" do
+			test "#{BRAND}AWiHTTP should get show #{awihttp_title(options)}" do
 				turn_https_off
 				login_as send(options[:login])
 				args={}
@@ -101,7 +101,7 @@ module AccessibleViaProtocol
 				assert_nil flash[:error]
 			end if actions.include?(:show) || options.keys.include?(:show)
 
-			test "AWiHTTP should delete destroy #{awihttp_title(options)}" do
+			test "#{BRAND}AWiHTTP should delete destroy #{awihttp_title(options)}" do
 				turn_https_off
 				login_as send(options[:login])
 				args={}
@@ -117,7 +117,7 @@ module AccessibleViaProtocol
 				assert_nil flash[:error]
 			end if actions.include?(:destroy) || options.keys.include?(:destroy)
 
-			test "AWiHTTP should get index #{awihttp_title(options)}" do
+			test "#{BRAND}AWiHTTP should get index #{awihttp_title(options)}" do
 				turn_https_off
 				login_as send(options[:login])
 				get :index
@@ -127,7 +127,7 @@ module AccessibleViaProtocol
 				assert_nil flash[:error]
 			end if actions.include?(:index) || options.keys.include?(:index)
 
-			test "AWiHTTP should get index #{awihttp_title(options)} and items" do
+			test "#{BRAND}AWiHTTP should get index #{awihttp_title(options)} and items" do
 				turn_https_off
 				send(options[:before]) if !options[:before].blank?
 				login_as send(options[:login])
@@ -159,7 +159,7 @@ module AccessibleViaProtocol
 
 			m_key = options[:model].try(:underscore).try(:to_sym)
 
-			test "AWiHTTPS should get new #{awihttps_title(options)}" do
+			test "#{BRAND}AWiHTTPS should get new #{awihttps_title(options)}" do
 				login_as send(options[:login])
 				args = options[:new] || {}
 				turn_https_on
@@ -170,7 +170,7 @@ module AccessibleViaProtocol
 				assert_nil flash[:error]
 			end if actions.include?(:new) || options.keys.include?(:new)
 
-			test "AWiHTTPS should post create #{awihttps_title(options)}" do
+			test "#{BRAND}AWiHTTPS should post create #{awihttps_title(options)}" do
 				login_as send(options[:login])
 				args = if options[:create]
 					options[:create]
@@ -187,7 +187,7 @@ module AccessibleViaProtocol
 				assert_nil flash[:error]
 			end if actions.include?(:create) || options.keys.include?(:create)
 
-			test "AWiHTTPS should get edit #{awihttps_title(options)}" do
+			test "#{BRAND}AWiHTTPS should get edit #{awihttps_title(options)}" do
 				login_as send(options[:login])
 				args={}
 				if options[:method_for_create]
@@ -202,7 +202,7 @@ module AccessibleViaProtocol
 				assert_nil flash[:error]
 			end if actions.include?(:edit) || options.keys.include?(:edit)
 
-			test "AWiHTTPS should put update #{awihttps_title(options)}" do
+			test "#{BRAND}AWiHTTPS should put update #{awihttps_title(options)}" do
 				login_as send(options[:login])
 				args={}
 				if options[:method_for_create] && options[:attributes_for_create]
@@ -220,7 +220,7 @@ module AccessibleViaProtocol
 				assert_nil flash[:error]
 			end if actions.include?(:update) || options.keys.include?(:update)
 
-			test "AWiHTTPS should get show #{awihttps_title(options)}" do
+			test "#{BRAND}AWiHTTPS should get show #{awihttps_title(options)}" do
 				login_as send(options[:login])
 				args={}
 				if options[:method_for_create]
@@ -235,7 +235,7 @@ module AccessibleViaProtocol
 				assert_nil flash[:error]
 			end if actions.include?(:show) || options.keys.include?(:show)
 
-			test "AWiHTTPS should delete destroy #{awihttps_title(options)}" do
+			test "#{BRAND}AWiHTTPS should delete destroy #{awihttps_title(options)}" do
 				login_as send(options[:login])
 				args={}
 				if options[:method_for_create]
@@ -251,7 +251,7 @@ module AccessibleViaProtocol
 				assert_nil flash[:error]
 			end if actions.include?(:destroy) || options.keys.include?(:destroy)
 
-			test "AWiHTTPS should get index #{awihttps_title(options)}" do
+			test "#{BRAND}AWiHTTPS should get index #{awihttps_title(options)}" do
 				login_as send(options[:login])
 				turn_https_on
 				get :index
@@ -261,7 +261,7 @@ module AccessibleViaProtocol
 				assert_nil flash[:error]
 			end if actions.include?(:index) || options.keys.include?(:index)
 
-			test "AWiHTTPS should get index #{awihttps_title(options)} and items" do
+			test "#{BRAND}AWiHTTPS should get index #{awihttps_title(options)} and items" do
 				send(options[:before]) if !options[:before].blank?
 				login_as send(options[:login])
 				3.times{ send(options[:method_for_create]) } if !options[:method_for_create].blank?
@@ -293,7 +293,7 @@ module AccessibleViaProtocol
 
 			m_key = options[:model].try(:underscore).try(:to_sym)
 
-			test "NAWiHTTP should NOT get new #{nawihttp_title(options)}" do
+			test "#{BRAND}NAWiHTTP should NOT get new #{nawihttp_title(options)}" do
 				turn_https_off
 				login_as send(options[:login])
 				args = options[:new]||{}
@@ -303,7 +303,7 @@ module AccessibleViaProtocol
 					:action => 'new', :protocol => "https://")
 			end if actions.include?(:new) || options.keys.include?(:new)
 
-			test "NAWiHTTP should NOT post create #{nawihttp_title(options)}" do
+			test "#{BRAND}NAWiHTTP should NOT post create #{nawihttp_title(options)}" do
 				turn_https_off
 				login_as send(options[:login])
 				args = if options[:create]
@@ -321,7 +321,7 @@ module AccessibleViaProtocol
 					:action => 'create', :protocol => "https://"),@response.redirected_to
 			end if actions.include?(:create) || options.keys.include?(:create)
 
-			test "NAWiHTTP should NOT get edit #{nawihttp_title(options)}" do
+			test "#{BRAND}NAWiHTTP should NOT get edit #{nawihttp_title(options)}" do
 				turn_https_off
 				login_as send(options[:login])
 				args=options[:edit]||{}
@@ -335,7 +335,7 @@ module AccessibleViaProtocol
 					:action => 'edit', :id => args[:id], :protocol => "https://")
 			end if actions.include?(:edit) || options.keys.include?(:edit)
 
-			test "NAWiHTTP should NOT put update #{nawihttp_title(options)}" do
+			test "#{BRAND}NAWiHTTP should NOT put update #{nawihttp_title(options)}" do
 				turn_https_off
 				login_as send(options[:login])
 				args={}
@@ -353,7 +353,7 @@ module AccessibleViaProtocol
 					:action => 'update', :id => args[:id], :protocol => "https://"), @response.redirected_to
 			end if actions.include?(:update) || options.keys.include?(:update)
 
-			test "NAWiHTTP should NOT get show #{nawihttp_title(options)}" do
+			test "#{BRAND}NAWiHTTP should NOT get show #{nawihttp_title(options)}" do
 				turn_https_off
 				login_as send(options[:login])
 				args=options[:show]||{}
@@ -367,7 +367,7 @@ module AccessibleViaProtocol
 					:action => 'show', :id => args[:id], :protocol => "https://")
 			end if actions.include?(:show) || options.keys.include?(:show)
 
-			test "NAWiHTTP should NOT delete destroy #{nawihttp_title(options)}" do
+			test "#{BRAND}NAWiHTTP should NOT delete destroy #{nawihttp_title(options)}" do
 				turn_https_off
 				login_as send(options[:login])
 				args=options[:destroy]||{}
@@ -383,7 +383,7 @@ module AccessibleViaProtocol
 					:action => 'destroy', :id => args[:id], :protocol => "https://")
 			end if actions.include?(:destroy) || options.keys.include?(:destroy)
 
-			test "NAWiHTTP should NOT get index #{nawihttp_title(options)}" do
+			test "#{BRAND}NAWiHTTP should NOT get index #{nawihttp_title(options)}" do
 				turn_https_off
 				login_as send(options[:login])
 				get :index

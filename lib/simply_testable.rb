@@ -1,4 +1,5 @@
 module SimplyTestable
+	BRAND = "@@ "
 module ActionControllerExtension
 #	predefine namespaces
 end
