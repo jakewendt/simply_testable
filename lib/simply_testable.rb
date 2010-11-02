@@ -1,4 +1,6 @@
-BRAND = "@@ "
+def brand
+	"@@ "
+end
 module SimplyTestable
 module ActionControllerExtension
 #	predefine namespaces

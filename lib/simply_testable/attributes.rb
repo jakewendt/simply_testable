@@ -13,7 +13,7 @@ module SimplyTestable::Attributes
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				title = "#{BRAND}should require unique #{attr}"
+				title = "#{brand}should require unique #{attr}"
 				scope = user_options[:scope]
 				unless scope.blank?
 					title << " scope "
@@ -47,7 +47,7 @@ module SimplyTestable::Attributes
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				test "#{BRAND}should require #{attr} not nil" do
+				test "#{brand}should require #{attr} not nil" do
 					assert_no_difference "#{model}.count" do
 						object = create_object(attr.to_sym => nil)
 						assert object.errors.on(attr.to_sym)
@@ -64,7 +64,7 @@ module SimplyTestable::Attributes
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				test "#{BRAND}should require #{attr}" do
+				test "#{brand}should require #{attr}" do
 					assert_no_difference "#{model}.count" do
 						object = create_object(attr.to_sym => nil)
 						assert object.errors.on_attr_and_type(attr.to_sym, :blank) ||
@@ -84,7 +84,7 @@ module SimplyTestable::Attributes
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				test "#{BRAND}should not require #{attr}" do
+				test "#{brand}should not require #{attr}" do
 					assert_difference( "#{model}.count", 1 ) do
 						object = create_object(attr.to_sym => nil)
 						assert !object.errors.on(attr.to_sym)
@@ -106,7 +106,7 @@ module SimplyTestable::Attributes
 				attr = attr.to_s
 				if user_options.keys.include?(:minimum)
 					min = user_options[:minimum]
-					test "#{BRAND}should require min length of #{min} for #{attr}" do
+					test "#{brand}should require min length of #{min} for #{attr}" do
 						assert_no_difference "#{model}.count" do
 							value = 'x'*(min-1)
 							object = create_object(attr.to_sym => value)
@@ -118,7 +118,7 @@ module SimplyTestable::Attributes
 				end
 				if user_options.keys.include?(:maximum)
 					max = user_options[:maximum]
-					test "#{BRAND}should require max length of #{max} for #{attr}" do
+					test "#{brand}should require max length of #{max} for #{attr}" do
 						assert_no_difference "#{model}.count" do
 							value = 'x'*(max+1)
 							object = create_object(attr.to_sym => value)
@@ -138,7 +138,7 @@ module SimplyTestable::Attributes
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				test "#{BRAND}should protect attribute #{attr}" do
+				test "#{brand}should protect attribute #{attr}" do
 					assert model.accessible_attributes||model.protected_attributes,
 						"Both accessible and protected attributes are empty"
 					assert !(model.accessible_attributes||[]).include?(attr),
@@ -160,7 +160,7 @@ module SimplyTestable::Attributes
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				test "#{BRAND}should not protect attribute #{attr}" do
+				test "#{brand}should not protect attribute #{attr}" do
 					assert !(model.protected_attributes||[]).include?(attr),
 						"#{attr} is included in protected attributes"
 					if !model.accessible_attributes.nil?

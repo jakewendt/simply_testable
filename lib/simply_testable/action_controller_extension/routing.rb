@@ -11,7 +11,7 @@ module Routing
 #		end
 
 		def assert_no_route(verb,action,args={})
-			test "#{BRAND}no route to #{verb} #{action} #{args}" do
+			test "#{brand}no route to #{verb} #{action} #{args}" do
 				assert_raise(ActionController::RoutingError){
 					send(verb,action,args)
 				}

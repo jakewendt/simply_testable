@@ -53,7 +53,7 @@ module AccessibleViaUser
 				#	will be the last in the array at runtime.
 				options[:login] = login
 
-			test "#{BRAND}should get new #{awil_title(options)}" do
+			test "#{brand}should get new #{awil_title(options)}" do
 				login_as send(login)
 				args = options[:new] || {}
 				send(:get,:new,args)
@@ -63,7 +63,7 @@ module AccessibleViaUser
 				assert_nil flash[:error]
 			end if actions.include?(:new) || options.keys.include?(:new)
 
-			test "#{BRAND}should post create #{awil_title(options)}" do
+			test "#{brand}should post create #{awil_title(options)}" do
 				login_as send(login)
 				args = if options[:create]
 					options[:create]
@@ -79,7 +79,7 @@ module AccessibleViaUser
 				assert_nil flash[:error]
 			end if actions.include?(:create) || options.keys.include?(:create)
 
-			test "#{BRAND}should get edit #{awil_title(options)}" do
+			test "#{brand}should get edit #{awil_title(options)}" do
 				login_as send(login)
 				args={}
 				if options[:method_for_create]
@@ -93,7 +93,7 @@ module AccessibleViaUser
 				assert_nil flash[:error]
 			end if actions.include?(:edit) || options.keys.include?(:edit)
 
-			test "#{BRAND}should put update #{awil_title(options)}" do
+			test "#{brand}should put update #{awil_title(options)}" do
 				login_as send(login)
 				args={}
 				if options[:method_for_create] && options[:attributes_for_create]
@@ -110,7 +110,7 @@ module AccessibleViaUser
 				assert_nil flash[:error]
 			end if actions.include?(:update) || options.keys.include?(:update)
 
-			test "#{BRAND}should get show #{awil_title(options)}" do
+			test "#{brand}should get show #{awil_title(options)}" do
 				login_as send(login)
 				args={}
 				if options[:method_for_create]
@@ -124,7 +124,7 @@ module AccessibleViaUser
 				assert_nil flash[:error]
 			end if actions.include?(:show) || options.keys.include?(:show)
 
-			test "#{BRAND}should delete destroy #{awil_title(options)}" do
+			test "#{brand}should delete destroy #{awil_title(options)}" do
 				login_as send(login)
 				args={}
 				if options[:method_for_create]
@@ -139,7 +139,7 @@ module AccessibleViaUser
 				assert_nil flash[:error]
 			end if actions.include?(:destroy) || options.keys.include?(:destroy)
 
-			test "#{BRAND}should get index #{awil_title(options)}" do
+			test "#{brand}should get index #{awil_title(options)}" do
 				login_as send(login)
 				get :index
 				assert_response :success
@@ -148,7 +148,7 @@ module AccessibleViaUser
 				assert_nil flash[:error]
 			end if actions.include?(:index) || options.keys.include?(:index)
 
-			test "#{BRAND}should get index #{awil_title(options)} and items" do
+			test "#{brand}should get index #{awil_title(options)} and items" do
 				send(options[:before]) if !options[:before].blank?
 				login_as send(login)
 				3.times{ send(options[:method_for_create]) } if !options[:method_for_create].blank?
@@ -216,7 +216,7 @@ module AccessibleViaUser
 #				assert_redirected_to_login
 #			end if actions.include?(:update) || options.keys.include?(:update)
 
-			test "#{BRAND}AWoL should get show without login" do
+			test "#{brand}AWoL should get show without login" do
 				args={}
 				if options[:method_for_create]
 					obj = send(options[:method_for_create])
@@ -271,7 +271,7 @@ module AccessibleViaUser
 				#	will be the last in the array at runtime.
 				options[:login] = login
 
-			test "#{BRAND}should NOT get new #{nawil_title(options)}" do
+			test "#{brand}should NOT get new #{nawil_title(options)}" do
 				login_as send(login)
 				args = options[:new]||{}
 				send(:get,:new,args)
@@ -279,7 +279,7 @@ module AccessibleViaUser
 				assert_redirected_to nawil_redirection(options)
 			end if actions.include?(:new) || options.keys.include?(:new)
 
-			test "#{BRAND}should NOT post create #{nawil_title(options)}" do
+			test "#{brand}should NOT post create #{nawil_title(options)}" do
 				login_as send(login)
 				args = if options[:create]
 					options[:create]
@@ -295,7 +295,7 @@ module AccessibleViaUser
 				assert_redirected_to nawil_redirection(options)
 			end if actions.include?(:create) || options.keys.include?(:create)
 
-			test "#{BRAND}should NOT get edit #{nawil_title(options)}" do
+			test "#{brand}should NOT get edit #{nawil_title(options)}" do
 				login_as send(login)
 				args=options[:edit]||{}
 				if options[:method_for_create]
@@ -307,7 +307,7 @@ module AccessibleViaUser
 				assert_redirected_to nawil_redirection(options)
 			end if actions.include?(:edit) || options.keys.include?(:edit)
 
-			test "#{BRAND}should NOT put update #{nawil_title(options)}" do
+			test "#{brand}should NOT put update #{nawil_title(options)}" do
 				login_as send(login)
 				args=options[:update]||{}
 				if options[:method_for_create] && options[:attributes_for_create]
@@ -323,7 +323,7 @@ module AccessibleViaUser
 				assert_redirected_to nawil_redirection(options)
 			end if actions.include?(:update) || options.keys.include?(:update)
 
-			test "#{BRAND}should NOT get show #{nawil_title(options)}" do
+			test "#{brand}should NOT get show #{nawil_title(options)}" do
 				login_as send(login)
 				args=options[:show]||{}
 				if options[:method_for_create]
@@ -335,7 +335,7 @@ module AccessibleViaUser
 				assert_redirected_to nawil_redirection(options)
 			end if actions.include?(:show) || options.keys.include?(:show)
 
-			test "#{BRAND}should NOT delete destroy #{nawil_title(options)}" do
+			test "#{brand}should NOT delete destroy #{nawil_title(options)}" do
 				login_as send(login)
 				args=options[:destroy]||{}
 				if options[:method_for_create]
@@ -349,7 +349,7 @@ module AccessibleViaUser
 				assert_redirected_to nawil_redirection(options)
 			end if actions.include?(:destroy) || options.keys.include?(:destroy)
 
-			test "#{BRAND}should NOT get index #{nawil_title(options)}" do
+			test "#{brand}should NOT get index #{nawil_title(options)}" do
 				login_as send(login)
 				get :index
 				assert_not_nil flash[:error]
@@ -371,12 +371,12 @@ module AccessibleViaUser
 
 			m_key = options[:model].try(:underscore).try(:to_sym)
 
-			test "#{BRAND}should NOT get new without login" do
+			test "#{brand}should NOT get new without login" do
 				get :new
 				assert_redirected_to_login
 			end if actions.include?(:new) || options.keys.include?(:new)
 
-			test "#{BRAND}should NOT post create without login" do
+			test "#{brand}should NOT post create without login" do
 				args = if options[:create]
 					options[:create]
 				elsif options[:attributes_for_create]
@@ -390,7 +390,7 @@ module AccessibleViaUser
 				assert_redirected_to_login
 			end if actions.include?(:create) || options.keys.include?(:create)
 
-			test "#{BRAND}should NOT get edit without login" do
+			test "#{brand}should NOT get edit without login" do
 				args={}
 				if options[:method_for_create]
 					obj = send(options[:method_for_create])
@@ -400,7 +400,7 @@ module AccessibleViaUser
 				assert_redirected_to_login
 			end if actions.include?(:edit) || options.keys.include?(:edit)
 
-			test "#{BRAND}should NOT put update without login" do
+			test "#{brand}should NOT put update without login" do
 				args={}
 				if options[:method_for_create] && options[:attributes_for_create]
 					obj = send(options[:method_for_create])
@@ -414,7 +414,7 @@ module AccessibleViaUser
 				assert_redirected_to_login
 			end if actions.include?(:update) || options.keys.include?(:update)
 
-			test "#{BRAND}should NOT get show without login" do
+			test "#{brand}should NOT get show without login" do
 				args={}
 				if options[:method_for_create]
 					obj = send(options[:method_for_create])
@@ -424,7 +424,7 @@ module AccessibleViaUser
 				assert_redirected_to_login
 			end if actions.include?(:show) || options.keys.include?(:show)
 
-			test "#{BRAND}should NOT delete destroy without login" do
+			test "#{brand}should NOT delete destroy without login" do
 				args={}
 				if options[:method_for_create]
 					obj = send(options[:method_for_create])
@@ -436,7 +436,7 @@ module AccessibleViaUser
 				assert_redirected_to_login
 			end if actions.include?(:destroy) || options.keys.include?(:destroy)
 
-			test "#{BRAND}should NOT get index without login" do
+			test "#{brand}should NOT get index without login" do
 				get :index
 				assert_redirected_to_login
 			end if actions.include?(:index) || options.keys.include?(:index)
