@@ -10,6 +10,7 @@ end
 #	This may require the addition of other gem requirements
 #
 require 'active_support/test_case'
+require 'simply_testable/test_case'
 require 'simply_testable/declarative'
 require 'simply_testable/assertions'
 require 'simply_testable/acts_as_list'
