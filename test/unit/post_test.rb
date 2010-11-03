@@ -14,8 +14,4 @@ class PostTest < ActiveSupport::TestCase
 #	assert_should_belong_to(:blog)
 	assert_should_initially_belong_to(:blog)
 
-protected
-
-	alias_method :create_object, :create_post
-
 end

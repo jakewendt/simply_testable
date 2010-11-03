@@ -15,8 +15,4 @@ class BlogTest < ActiveSupport::TestCase
 #	assert_should_belong_to(:data_source)
 #	assert_should_initially_belong_to(:address_type)
 
-protected
-
-	alias_method :create_object, :create_blog
-
 end
