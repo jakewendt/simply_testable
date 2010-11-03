@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jakewendt-simply_testable}
-  s.version = "1.5.5"
+  s.version = "1.5.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jake"]
-  s.date = %q{2010-11-02}
+  s.date = %q{2010-11-03}
   s.description = %q{longer description of your gem}
   s.email = %q{github@jake.otherinbox.com}
   s.extra_rdoc_files = [
@@ -29,7 +29,8 @@ Gem::Specification.new do |s|
      "lib/simply_testable/associations.rb",
      "lib/simply_testable/attributes.rb",
      "lib/simply_testable/declarative.rb",
-     "lib/simply_testable/errors.rb"
+     "lib/simply_testable/errors.rb",
+     "lib/simply_testable/pending.rb"
   ]
   s.homepage = %q{http://github.com/jakewendt/simply_testable}
   s.rdoc_options = ["--charset=UTF-8"]
