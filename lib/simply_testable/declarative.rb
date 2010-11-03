@@ -53,5 +53,5 @@ Rails.backtrace_cleaner.add_silencer {|line|
 
 #	This doesn't seem to work at all in the plugin engine.
 #	line =~ /test.*\/declarative\.rb:/
-	line =~ /assert_this_and_that\/declarative\.rb:/
+	line =~ /simply_testable\/declarative\.rb:/
 } if defined? Rails 

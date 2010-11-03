@@ -9,7 +9,7 @@ module SimplyTestable::Attributes
 
 		def assert_should_require_unique_attribute(*attributes)
 			user_options = attributes.extract_options!
-			model = user_options[:model] || self.name.sub(/Test$/,'')
+			model = user_options[:model] || st_model_name
 			
 			attributes.each do |attr|
 				attr = attr.to_s
@@ -43,7 +43,7 @@ module SimplyTestable::Attributes
 
 		def assert_should_require_attribute_not_nil(*attributes)
 			user_options = attributes.extract_options!
-			model = user_options[:model] || self.name.sub(/Test$/,'')
+			model = user_options[:model] || st_model_name
 			
 			attributes.each do |attr|
 				attr = attr.to_s
@@ -60,7 +60,7 @@ module SimplyTestable::Attributes
 
 		def assert_should_require_attribute(*attributes)
 			user_options = attributes.extract_options!
-			model = user_options[:model] || self.name.sub(/Test$/,'')
+			model = user_options[:model] || st_model_name
 			
 			attributes.each do |attr|
 				attr = attr.to_s
@@ -80,7 +80,7 @@ module SimplyTestable::Attributes
 
 		def assert_should_not_require_attribute(*attributes)
 			user_options = attributes.extract_options!
-			model = user_options[:model] || self.name.sub(/Test$/,'')
+			model = user_options[:model] || st_model_name
 			
 			attributes.each do |attr|
 				attr = attr.to_s
@@ -100,7 +100,7 @@ module SimplyTestable::Attributes
 
 		def assert_should_require_attribute_length(*attributes)
 			user_options = attributes.extract_options!
-			model = user_options[:model] || self.name.sub(/Test$/,'')
+			model = user_options[:model] || st_model_name
 			
 			attributes.each do |attr|
 				attr = attr.to_s
@@ -133,7 +133,7 @@ module SimplyTestable::Attributes
 
 		def assert_should_protect_attribute(*attributes)
 			user_options = attributes.extract_options!
-			model_name = user_options[:model] || self.name.sub(/Test$/,'')
+			model_name = user_options[:model] || st_model_name
 			model = model_name.constantize
 			
 			attributes.each do |attr|
@@ -155,7 +155,7 @@ module SimplyTestable::Attributes
 
 		def assert_should_not_protect_attribute(*attributes)
 			user_options = attributes.extract_options!
-			model_name = user_options[:model] || self.name.sub(/Test$/,'')
+			model_name = user_options[:model] || st_model_name
 			model = model_name.constantize
 			
 			attributes.each do |attr|

@@ -9,7 +9,7 @@ module SimplyTestable::Associations
 
 		def assert_should_initially_belong_to(*associations)
 			user_options = associations.extract_options!
-			model = user_options[:model] || self.name.sub(/Test$/,'')
+			model = user_options[:model] || st_model_name
 			
 			associations.each do |assoc|
 				class_name = ( assoc = assoc.to_s ).camelize
@@ -38,7 +38,7 @@ module SimplyTestable::Associations
 
 		def assert_should_belong_to(*associations)
 			user_options = associations.extract_options!
-			model = user_options[:model] || self.name.sub(/Test$/,'')
+			model = user_options[:model] || st_model_name
 			
 			associations.each do |assoc|
 				class_name = ( assoc = assoc.to_s ).camelize
@@ -65,7 +65,7 @@ module SimplyTestable::Associations
 
 		def assert_should_have_one(*associations)
 			user_options = associations.extract_options!
-			model = user_options[:model] || self.name.sub(/Test$/,'')
+			model = user_options[:model] || st_model_name
 			
 			associations.each do |assoc|
 				assoc = assoc.to_s
@@ -85,7 +85,7 @@ module SimplyTestable::Associations
 
 		def assert_should_have_many_(*associations)
 			user_options = associations.extract_options!
-			model = user_options[:model] || self.name.sub(/Test$/,'')
+			model = user_options[:model] || st_model_name
 
 			foreign_key = if !user_options[:foreign_key].blank?
 				user_options[:foreign_key].to_sym
@@ -130,7 +130,7 @@ module SimplyTestable::Associations
 
 		def assert_should_habtm(*associations)
 			user_options = associations.extract_options!
-			model = user_options[:model] || self.name.sub(/Test$/,'')
+			model = user_options[:model] || st_model_name
 			
 			associations.each do |assoc|
 				assoc = assoc.to_s
@@ -156,7 +156,7 @@ module SimplyTestable::Associations
 
 		def assert_requires_valid_associations(*associations)
 			user_options = associations.extract_options!
-			model = user_options[:model] || self.name.sub(/Test$/,'')
+			model = user_options[:model] || st_model_name
 
 			associations.each do |assoc|
 				as = assoc = assoc.to_s

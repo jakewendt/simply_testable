@@ -1,7 +1,7 @@
 module SimplyTestable::TestCase
 
 	def self.included(base)
-#		base.extend(ClassMethods)
+		base.extend(ClassMethods)
 		base.send(:include, InstanceMethods)
 		base.class_eval do
 #			class << self
@@ -10,11 +10,21 @@ module SimplyTestable::TestCase
 		end
 	end
 
+	module ClassMethods
+
+		#	I don't like this quick and dirty name
+		def st_model_name
+			self.name.demodulize.sub(/Test$/,'')
+		end
+
+	end
+
 	module InstanceMethods
 
 		def model_name
 #			self.class.name.sub(/Test$/,'')
-			self.class.name.demodulize.sub(/Test$/,'')
+#			self.class.name.demodulize.sub(/Test$/,'')
+			self.class.st_model_name
 		end
 
 		def method_missing_with_create_object(symb,*args, &block)
