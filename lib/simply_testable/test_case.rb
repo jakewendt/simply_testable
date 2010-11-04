@@ -45,6 +45,7 @@ module SimplyTestable::TestCase
 				options = args.extract_options!
 				if bang.blank?
 					record = Factory.build(factory,options)
+					record.attributes = options	#	occassionally needed (study_subject_id)
 					record.save
 					record
 				else
