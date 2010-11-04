@@ -67,13 +67,19 @@ module SimplyTestable::Associations
 			user_options = associations.extract_options!
 			model = user_options[:model] || st_model_name
 			
+			foreign_key = if !user_options[:foreign_key].blank?
+				user_options[:foreign_key].to_sym
+			else
+				"#{model.underscore}_id".to_sym
+			end
+
 			associations.each do |assoc|
 				assoc = assoc.to_s
 
 				test "#{brand}should have one #{assoc}" do
 					object = create_object
 					assert_nil object.send(assoc)
-					Factory(assoc, "#{model.underscore}_id".to_sym => object.id)
+					Factory(assoc, foreign_key => object.id)
 					assert_not_nil object.reload.send(assoc)
 					object.send(assoc).destroy
 					assert_nil object.reload.send(assoc)
