@@ -111,14 +111,22 @@ module SimplyTestable::Associations
 				test title do
 					object = create_object
 					assert_equal 0, object.send(assoc).length
+					command = ["create_#{class_name.singularize.underscore}"]
+					if !user_options[:foreign_key].blank?
+						command.push( user_options[:foreign_key].to_sym => object.id )
+					else
+						command.push( model.underscore => object )
+					end
 #					send("create_#{class_name.singularize.underscore}", foreign_key => object.id)
-					send("create_#{class_name.singularize.underscore}", model.underscore => object )
+#					send("create_#{class_name.singularize.underscore}", model.underscore => object )
+					send *command
 					assert_equal 1, object.reload.send(assoc).length
 					if object.respond_to?("#{assoc}_count")
 						assert_equal 1, object.reload.send("#{assoc}_count")
 					end
 #					send("create_#{class_name.singularize.underscore}", foreign_key => object.id)
-					send("create_#{class_name.singularize.underscore}", model.underscore => object )
+#					send("create_#{class_name.singularize.underscore}", model.underscore => object )
+					send *command
 					assert_equal 2, object.reload.send(assoc).length
 					if object.respond_to?("#{assoc}_count")
 						assert_equal 2, object.reload.send("#{assoc}_count")
