@@ -1,4 +1,5 @@
 Factory.define :blog do |f|
+	f.association :user
 	f.sequence(:title) { |n| "Title #{n}" }
 #	f.sequence(:description) { |n| "Desc#{n}" }
 end

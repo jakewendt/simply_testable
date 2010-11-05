@@ -4,4 +4,5 @@ class Post < ActiveRecord::Base
 	belongs_to :blog, :counter_cache => true
 	validates_presence_of :title
 	validates_length_of   :title, :maximum => 250
+	validates_presence_of :blog, :blog_id
 end

@@ -9,10 +9,9 @@ class BlogTest < ActiveSupport::TestCase
 #	assert_should_not_require_attributes(
 #		:description)
 
-#	assert_requires_valid_associations(:address_type)
+	assert_requires_valid_associations(:user, :as => 'owner')
 #	assert_should_have_one(:addressing)
 	assert_should_have_many(:posts)
-	assert_should_belong_to( :user, :foreign_key => 'owner_id' )
-#	assert_should_initially_belong_to(:address_type)
+	assert_should_initially_belong_to( :user, :foreign_key => 'owner_id' )
 
 end

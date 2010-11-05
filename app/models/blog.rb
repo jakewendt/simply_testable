@@ -4,4 +4,5 @@ class Blog < ActiveRecord::Base
 	validates_presence_of   :title
 	validates_length_of     :title, :minimum => 5
 	validates_uniqueness_of :title
+	validates_presence_of   :user, :owner_id
 end
