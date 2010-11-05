@@ -67,19 +67,20 @@ module SimplyTestable::Associations
 			user_options = associations.extract_options!
 			model = user_options[:model] || st_model_name
 			
-			foreign_key = if !user_options[:foreign_key].blank?
-				user_options[:foreign_key].to_sym
-			else
-				"#{model.underscore}_id".to_sym
-			end
+#			foreign_key = if !user_options[:foreign_key].blank?
+#				user_options[:foreign_key].to_sym
+#			else
+#				"#{model.underscore}_id".to_sym
+#			end
 
 			associations.each do |assoc|
 				assoc = assoc.to_s
 
 				test "#{brand}should have one #{assoc}" do
 					object = create_object
-					assert_nil object.send(assoc)
-					send("create_#{assoc}", foreign_key => object.id)
+					assert_nil object.reload.send(assoc)
+#					send("create_#{assoc}", foreign_key => object.id)
+					send("create_#{assoc}", model.underscore => object )
 					assert_not_nil object.reload.send(assoc)
 					object.send(assoc).destroy
 					assert_nil object.reload.send(assoc)
@@ -93,11 +94,11 @@ module SimplyTestable::Associations
 			user_options = associations.extract_options!
 			model = user_options[:model] || st_model_name
 
-			foreign_key = if !user_options[:foreign_key].blank?
-				user_options[:foreign_key].to_sym
-			else
-				"#{model.underscore}_id".to_sym
-			end
+#			foreign_key = if !user_options[:foreign_key].blank?
+#				user_options[:foreign_key].to_sym
+#			else
+#				"#{model.underscore}_id".to_sym
+#			end
 
 			associations.each do |assoc|
 				class_name = ( assoc = assoc.to_s ).camelize
@@ -110,12 +111,14 @@ module SimplyTestable::Associations
 				test title do
 					object = create_object
 					assert_equal 0, object.send(assoc).length
-					send("create_#{class_name.singularize.underscore}", foreign_key => object.id)
+#					send("create_#{class_name.singularize.underscore}", foreign_key => object.id)
+					send("create_#{class_name.singularize.underscore}", model.underscore => object )
 					assert_equal 1, object.reload.send(assoc).length
 					if object.respond_to?("#{assoc}_count")
 						assert_equal 1, object.reload.send("#{assoc}_count")
 					end
-					send("create_#{class_name.singularize.underscore}", foreign_key => object.id)
+#					send("create_#{class_name.singularize.underscore}", foreign_key => object.id)
+					send("create_#{class_name.singularize.underscore}", model.underscore => object )
 					assert_equal 2, object.reload.send(assoc).length
 					if object.respond_to?("#{assoc}_count")
 						assert_equal 2, object.reload.send("#{assoc}_count")

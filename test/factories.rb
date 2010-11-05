@@ -13,3 +13,6 @@ end
 Factory.define :vendor do |f|
 	f.sequence(:name) { |n| "Name #{n}" }
 end
+Factory.define :user do |f|
+	f.sequence(:name) { |n| "Name #{n}" }
+end
