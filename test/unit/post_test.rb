@@ -8,7 +8,6 @@ class PostTest < ActiveSupport::TestCase
 		:maximum => 250 )
 	assert_should_not_require_attributes( :body)
 
-#	assert_requires_valid_associations(:blog)
 	assert_should_initially_belong_to(:blog)
 	assert_should_belong_to( :user, :foreign_key => 'author_id' )
 
