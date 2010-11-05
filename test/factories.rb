@@ -7,3 +7,9 @@ Factory.define :post do |f|
 	f.sequence(:title) { |n| "Title #{n}" }
 #	f.sequence(:body) { |n| "Desc#{n}" }
 end
+Factory.define :product do |f|
+	f.sequence(:name) { |n| "Name #{n}" }
+end
+Factory.define :vendor do |f|
+	f.sequence(:name) { |n| "Name #{n}" }
+end

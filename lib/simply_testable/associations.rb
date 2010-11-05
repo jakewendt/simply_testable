@@ -54,7 +54,6 @@ module SimplyTestable::Associations
 				test title do
 					object = create_object
 					assert_nil object.send(assoc)
-#					object.send("#{assoc}=",Factory(class_name.underscore))
 					object.send("#{assoc}=",send("create_#{class_name.underscore}"))
 					assert_not_nil object.send(assoc)
 					assert object.send(assoc).is_a?(class_name.constantize)
@@ -80,7 +79,6 @@ module SimplyTestable::Associations
 				test "#{brand}should have one #{assoc}" do
 					object = create_object
 					assert_nil object.send(assoc)
-#					Factory(assoc, foreign_key => object.id)
 					send("create_#{assoc}", foreign_key => object.id)
 					assert_not_nil object.reload.send(assoc)
 					object.send(assoc).destroy
@@ -112,15 +110,11 @@ module SimplyTestable::Associations
 				test title do
 					object = create_object
 					assert_equal 0, object.send(assoc).length
-#					Factory(class_name.singularize.underscore, foreign_key => object.id)
 					send("create_#{class_name.singularize.underscore}", foreign_key => object.id)
-#	doesn't work for all
-#object.send(assoc) << Factory(assoc.singularize)
 					assert_equal 1, object.reload.send(assoc).length
 					if object.respond_to?("#{assoc}_count")
 						assert_equal 1, object.reload.send("#{assoc}_count")
 					end
-#					Factory(class_name.singularize.underscore, foreign_key => object.id)
 					send("create_#{class_name.singularize.underscore}", foreign_key => object.id)
 					assert_equal 2, object.reload.send(assoc).length
 					if object.respond_to?("#{assoc}_count")
@@ -146,13 +140,11 @@ module SimplyTestable::Associations
 				test "#{brand}should habtm #{assoc}" do
 					object = create_object
 					assert_equal 0, object.send(assoc).length
-#					object.send(assoc) << Factory(assoc.singularize)
 					object.send(assoc) << send("create_#{assoc.singularize}")
 					assert_equal 1, object.reload.send(assoc).length
 					if object.respond_to?("#{assoc}_count")
 						assert_equal 1, object.reload.send("#{assoc}_count")
 					end
-#					object.send(assoc) << Factory(assoc.singularize)
 					object.send(assoc) << send("create_#{assoc.singularize}")
 					assert_equal 2, object.reload.send(assoc).length
 					if object.respond_to?("#{assoc}_count")
