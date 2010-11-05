@@ -26,9 +26,10 @@ begin
 		gem.authors = ["Jake"]
 		# gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
 
+		gem.files  = FileList['lib/**/*.rb']
+		gem.files += FileList['generators/**/*']
+		gem.files -= FileList['**/versions/*']
 
-		# we like to keep our gem slim
-		gem.files = FileList['lib/**/*.rb']
 		gem.test_files = []
 #		gem.test_files -= FileList['test/test_helper.rb']
 		gem.add_dependency('ssl_requirement', '>= 0.1.0')
