@@ -168,39 +168,39 @@ module SimplyTestable::Associations
 		end
 
 		def assert_requires_valid_associations(*associations)
-			user_options = associations.extract_options!
-			model = user_options[:model] || st_model_name
-
-			associations.each do |assoc|
-				as = assoc = assoc.to_s
-				as = user_options[:as] if !user_options[:as].blank?
-
-				test "#{brand}should require foreign key #{as}_id" do
-					assert_difference("#{model}.count",0) do
-						object = create_object("#{as}_id".to_sym => nil)
-						assert object.errors.on("#{as}_id".to_sym)
-					end
-				end
-
-#				test "#{brand}should require valid foreign key #{as}_id" do
-#					assert_difference("#{model}.count",0) do
-#						object = create_object("#{as}_id".to_sym => 0)
-#						assert object.errors.on("#{as}_id".to_sym)
+#				user_options = associations.extract_options!
+#				model = user_options[:model] || st_model_name
+#	
+#				associations.each do |assoc|
+#					as = assoc = assoc.to_s
+#					as = user_options[:as] if !user_options[:as].blank?
+#	
+#					test "#{brand}should require foreign key #{as}_id" do
+#						assert_difference("#{model}.count",0) do
+#							object = create_object("#{as}_id".to_sym => nil)
+#							assert object.errors.on("#{as}_id".to_sym)
+#						end
 #					end
+#	
+#	#				test "#{brand}should require valid foreign key #{as}_id" do
+#	#					assert_difference("#{model}.count",0) do
+#	#						object = create_object("#{as}_id".to_sym => 0)
+#	#						assert object.errors.on("#{as}_id".to_sym)
+#	#					end
+#	#				end
+#	
+#					title = "#{brand}should require valid association #{assoc}"
+#					title << " as #{user_options[:as]}" if !user_options[:as].blank?
+#					test title do
+#						assert_difference("#{model}.count",0) { 
+#							object = create_object(
+#								assoc.to_sym => Factory.build(assoc.to_sym))
+#	#							as.to_sym => Factory.build(assoc.to_sym))
+#							assert object.errors.on("#{as}_id".to_sym)
+#						}    
+#					end 
+#	
 #				end
-
-				title = "#{brand}should require valid association #{assoc}"
-				title << " as #{user_options[:as]}" if !user_options[:as].blank?
-				test title do
-					assert_difference("#{model}.count",0) { 
-						object = create_object(
-							assoc.to_sym => Factory.build(assoc.to_sym))
-#							as.to_sym => Factory.build(assoc.to_sym))
-						assert object.errors.on("#{as}_id".to_sym)
-					}    
-				end 
-
-			end
 
 		end
 		alias_method :assert_should_require_valid_associations,
