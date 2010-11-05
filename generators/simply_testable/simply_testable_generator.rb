@@ -9,7 +9,10 @@ class SimplyTestableGenerator < Rails::Generator::Base
 #	Create/append a generic .autotest that check config/autotests/
 #		(with unique marker)
 #
+#	Dir["#{File.dirname(__FILE__)}/config/autotest/**/*rb"].sort.each { |ext| load ext }
+#
 #	Create/append Rakefile to check config/rakefiles/
+#	Actually, the gems could just create a file in lib/tasks.  Duh!
 #
 
 
