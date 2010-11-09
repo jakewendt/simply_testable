@@ -10,6 +10,8 @@ Contains a collection of complex assertions.
    :lib    => 'simply_testable',
    :source => 'http://rubygems.org'
 
+ script/generate simply_testable
+
 == ToDo
 
 * add assert_should_protect_attributes(*attributes)

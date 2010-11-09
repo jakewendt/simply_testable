@@ -5,32 +5,13 @@ class SimplyTestableGenerator < Rails::Generator::Base
 		#	rails-2.3.10/lib/rails_generator/commands.rb
 		#	for code methods for record (Manifest)
 		record do |m|
-#
-#	Create/append a generic .autotest that check config/autotests/
-#		(with unique marker)
-#
-#	Dir["#{File.dirname(__FILE__)}/config/autotest/**/*rb"].sort.each { |ext| load ext }
-#
-#	Create/append Rakefile to check config/rakefiles/
-#	Actually, the gems could just create a file in lib/tasks.  Duh!
-#
+			File.open('.autotest','a'){|f| 
+				f.puts <<-EOF
+#	From `script/generate simply_testable` ...
+Dir["#{File.dirname(__FILE__)}/config/autotest/**/*rb"].sort.each { |ext| load ext }
+				EOF
+			}
 
-
-#	
-#				File.open('Rakefile','a'){|f| 
-#					f.puts <<-EOF
-#	#	From `script/generate simply_pages` ...
-#	require 'simply_pages/test_tasks'
-#					EOF
-#				}
-#	
-#				File.open('.autotest','a'){|f| 
-#					f.puts <<-EOF
-#	#	From `script/generate simply_pages` ...
-#	require 'simply_pages/autotest'
-#					EOF
-#				}
-#	
 #				%w( create_pages ).each do |migration|
 #					m.migration_template "migrations/#{migration}.rb",
 #						'db/migrate', :migration_file_name => migration
@@ -46,16 +27,16 @@ class SimplyTestableGenerator < Rails::Generator::Base
 #					f = file.split('/').slice(-2,2).join('/')
 #					m.file(f, "public/stylesheets/#{File.basename(file)}")
 #				}
-#	#			m.directory('test/functional/pages')
-#	#			Dir["#{File.dirname(__FILE__)}/templates/functional/*rb"].each{|file| 
-#	#				f = file.split('/').slice(-2,2).join('/')
-#	#				m.file(f, "test/functional/pages/#{File.basename(file)}")
-#	#			}
-#	#			m.directory('test/unit/pages')
-#	#			Dir["#{File.dirname(__FILE__)}/templates/unit/*rb"].each{|file| 
-#	#				f = file.split('/').slice(-2,2).join('/')
-#	#				m.file(f, "test/unit/pages/#{File.basename(file)}")
-#	#			}
+#				m.directory('test/functional/pages')
+#				Dir["#{File.dirname(__FILE__)}/templates/functional/*rb"].each{|file| 
+#					f = file.split('/').slice(-2,2).join('/')
+#					m.file(f, "test/functional/pages/#{File.basename(file)}")
+#				}
+#				m.directory('test/unit/pages')
+#				Dir["#{File.dirname(__FILE__)}/templates/unit/*rb"].each{|file| 
+#					f = file.split('/').slice(-2,2).join('/')
+#					m.file(f, "test/unit/pages/#{File.basename(file)}")
+#				}
 		end
 	end
 
