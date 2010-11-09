@@ -1,10 +1,8 @@
 = Simply Testable (RubyGem)
 
-Description goes here.
+Contains a collection of complex assertions.
 
 == Usage
-
-Contains a collection of complex assertions.
 
  config.gem 'jakewendt-simply_testable',
    :lib    => 'simply_testable',
