@@ -19,3 +19,12 @@ require 'simply_testable/attributes'
 require 'simply_testable/action_controller_extension'
 require 'simply_testable/errors'
 require 'simply_testable/pending'
+
+module ActiveSupport
+	module Testing
+		module AtExit
+			at_exit { puts Dir.pwd() }
+		end
+	end
+end
+ActiveSupport::TestCase.send(:include, ActiveSupport::Testing::AtExit)
