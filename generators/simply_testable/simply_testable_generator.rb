@@ -8,7 +8,7 @@ class SimplyTestableGenerator < Rails::Generator::Base
 			File.open('.autotest','a'){|f| 
 				f.puts <<-EOF
 #	From `script/generate simply_testable` ...
-Dir["#{File.dirname(__FILE__)}/config/autotest/**/*rb"].sort.each { |ext| load ext }
+Dir["\#{File.dirname(__FILE__)}/config/autotest/**/*rb"].sort.each { |ext| load ext }
 				EOF
 			}
 
