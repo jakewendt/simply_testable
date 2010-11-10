@@ -23,6 +23,9 @@ Rails::Initializer.run do |config|
 
 	config.frameworks -= [:active_resource]
 
+#	Because none of the rails structure is included in the gem,
+#	I use the normal locations rather than test/app
+
 #	config.routes_configuration_file = File.expand_path(
 #		File.join(File.dirname(__FILE__),'..','test/config/routes.rb'))
 

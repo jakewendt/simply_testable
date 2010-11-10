@@ -10,9 +10,6 @@ class ActiveSupport::TestCase
 	fixtures :all
 
 	def new_blog(options={})
-#		Blog.new({
-#			:title => "Fixed Title"
-#		}.merge(options))
 		Factory.build(:blog,options)
 	end
 
@@ -23,10 +20,6 @@ class ActiveSupport::TestCase
 	end
 
 	def new_post(options={})
-#		Post.new({
-#			:blog_id => create_blog.id,
-#			:title => "Fixed Title"
-#		}.merge(options))
 		Factory.build(:post,options)
 	end
 
@@ -38,8 +31,6 @@ class ActiveSupport::TestCase
 
 end
 
-class ActionController::TestCase
-
-	setup :turn_https_on
-
-end
+#class ActionController::TestCase
+#	setup :turn_https_on
+#end
