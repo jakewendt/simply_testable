@@ -16,6 +16,7 @@ Contains a collection of complex assertions.
 * add assert_should_allow_attributes(*attributes)
 * include assert_only_difference
 * add legitimate text to Rakefile
+* options to polymorphic associations
 
 == Gemified with Jeweler
 

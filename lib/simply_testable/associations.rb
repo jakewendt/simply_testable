@@ -8,16 +8,16 @@ module SimplyTestable::Associations
 	module ClassMethods
 
 		def assert_should_initially_belong_to(*associations)
-			user_options = associations.extract_options!
-			model = user_options[:model] || st_model_name
+			options = associations.extract_options!
+			model = options[:model] || st_model_name
 			
 			associations.each do |assoc|
 				class_name = ( assoc = assoc.to_s ).camelize
 
 				title = "#{brand}should initially belong to #{assoc}"
-				if !user_options[:class_name].blank?
-					title << " ( #{user_options[:class_name]} )"
-					class_name = user_options[:class_name].to_s
+				if !options[:class_name].blank?
+					title << " ( #{options[:class_name]} )"
+					class_name = options[:class_name].to_s
 				end
 				test title do
 					object = create_object
@@ -27,7 +27,7 @@ module SimplyTestable::Associations
 						assert_equal 1, object.reload.send(assoc).send(
 							"#{model.underscore.pluralize}_count")
 					end
-					if !user_options[:class_name].blank?
+					if !options[:class_name].blank?
 						assert object.send(assoc).is_a?(class_name.constantize)
 					end
 				end
@@ -37,26 +37,27 @@ module SimplyTestable::Associations
 		end
 
 		def assert_should_belong_to(*associations)
-			user_options = associations.extract_options!
-			model = user_options[:model] || st_model_name
+			options = associations.extract_options!
+			model = options[:model] || st_model_name
 			
 			associations.each do |assoc|
 				class_name = ( assoc = assoc.to_s ).camelize
 				title = "#{brand}should belong to #{assoc}" 
-#				if !user_options[:as].blank?
-#					title << " as #{user_options[:as]}"
-#					as = user_options[:as]
+#				if !options[:as].blank?
+#					title << " as #{options[:as]}"
+#					as = options[:as]
 #				end
-				if !user_options[:class_name].blank?
-					title << " ( #{user_options[:class_name]} )"
-					class_name = user_options[:class_name].to_s
+				if !options[:class_name].blank?
+					title << " ( #{options[:class_name]} )"
+					class_name = options[:class_name].to_s
 				end
 				test title do
 					object = create_object
 					assert_nil object.send(assoc)
 					object.send("#{assoc}=",send("create_#{class_name.underscore}"))
 					assert_not_nil object.send(assoc)
-					assert object.send(assoc).is_a?(class_name.constantize)
+					assert object.send(assoc).is_a?(class_name.constantize
+						) unless options[:polymorphic]
 				end
 
 			end
@@ -64,11 +65,11 @@ module SimplyTestable::Associations
 		end
 
 		def assert_should_have_one(*associations)
-			user_options = associations.extract_options!
-			model = user_options[:model] || st_model_name
+			options = associations.extract_options!
+			model = options[:model] || st_model_name
 			
-#			foreign_key = if !user_options[:foreign_key].blank?
-#				user_options[:foreign_key].to_sym
+#			foreign_key = if !options[:foreign_key].blank?
+#				options[:foreign_key].to_sym
 #			else
 #				"#{model.underscore}_id".to_sym
 #			end
@@ -91,11 +92,11 @@ module SimplyTestable::Associations
 		end
 
 		def assert_should_have_many_(*associations)
-			user_options = associations.extract_options!
-			model = user_options[:model] || st_model_name
+			options = associations.extract_options!
+			model = options[:model] || st_model_name
 
-#			foreign_key = if !user_options[:foreign_key].blank?
-#				user_options[:foreign_key].to_sym
+#			foreign_key = if !options[:foreign_key].blank?
+#				options[:foreign_key].to_sym
 #			else
 #				"#{model.underscore}_id".to_sym
 #			end
@@ -104,16 +105,16 @@ module SimplyTestable::Associations
 				class_name = ( assoc = assoc.to_s ).camelize
 
 				title = "#{brand}should have many #{assoc}"
-				if !user_options[:class_name].blank?
-					title << " ( #{user_options[:class_name]} )"
-					class_name = user_options[:class_name].to_s
+				if !options[:class_name].blank?
+					title << " ( #{options[:class_name]} )"
+					class_name = options[:class_name].to_s
 				end
 				test title do
 					object = create_object
 					assert_equal 0, object.send(assoc).length
 					command = ["create_#{class_name.singularize.underscore}"]
-					if !user_options[:foreign_key].blank?
-						command.push( user_options[:foreign_key].to_sym => object.id )
+					if !options[:foreign_key].blank?
+						command.push( options[:foreign_key].to_sym => object.id )
 					else
 						command.push( model.underscore => object )
 					end
@@ -142,8 +143,8 @@ module SimplyTestable::Associations
 			:assert_should_have_many_
 
 		def assert_should_habtm(*associations)
-			user_options = associations.extract_options!
-			model = user_options[:model] || st_model_name
+			options = associations.extract_options!
+			model = options[:model] || st_model_name
 			
 			associations.each do |assoc|
 				assoc = assoc.to_s
@@ -168,12 +169,12 @@ module SimplyTestable::Associations
 		end
 
 		def assert_requires_valid_associations(*associations)
-#				user_options = associations.extract_options!
-#				model = user_options[:model] || st_model_name
+#				options = associations.extract_options!
+#				model = options[:model] || st_model_name
 #	
 #				associations.each do |assoc|
 #					as = assoc = assoc.to_s
-#					as = user_options[:as] if !user_options[:as].blank?
+#					as = options[:as] if !options[:as].blank?
 #	
 #					test "#{brand}should require foreign key #{as}_id" do
 #						assert_difference("#{model}.count",0) do
@@ -190,7 +191,7 @@ module SimplyTestable::Associations
 #	#				end
 #	
 #					title = "#{brand}should require valid association #{assoc}"
-#					title << " as #{user_options[:as]}" if !user_options[:as].blank?
+#					title << " as #{options[:as]}" if !options[:as].blank?
 #					test title do
 #						assert_difference("#{model}.count",0) { 
 #							object = create_object(

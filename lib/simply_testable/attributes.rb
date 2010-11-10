@@ -8,13 +8,13 @@ module SimplyTestable::Attributes
 	module ClassMethods
 
 		def assert_should_require_unique_attribute(*attributes)
-			user_options = attributes.extract_options!
-			model = user_options[:model] || st_model_name
+			options = attributes.extract_options!
+			model = options[:model] || st_model_name
 			
 			attributes.each do |attr|
 				attr = attr.to_s
 				title = "#{brand}should require unique #{attr}"
-				scope = user_options[:scope]
+				scope = options[:scope]
 				unless scope.blank?
 					title << " scope "
 					title << (( scope.is_a?(Array) )?scope.join(','):scope.to_s)
@@ -42,8 +42,8 @@ module SimplyTestable::Attributes
 			:assert_should_require_unique_attribute
 
 		def assert_should_require_attribute_not_nil(*attributes)
-			user_options = attributes.extract_options!
-			model = user_options[:model] || st_model_name
+			options = attributes.extract_options!
+			model = options[:model] || st_model_name
 			
 			attributes.each do |attr|
 				attr = attr.to_s
@@ -59,8 +59,8 @@ module SimplyTestable::Attributes
 			:assert_should_require_attribute_not_nil
 
 		def assert_should_require_attribute(*attributes)
-			user_options = attributes.extract_options!
-			model = user_options[:model] || st_model_name
+			options = attributes.extract_options!
+			model = options[:model] || st_model_name
 			
 			attributes.each do |attr|
 				attr = attr.to_s
@@ -79,8 +79,8 @@ module SimplyTestable::Attributes
 			:assert_should_require_attribute
 
 		def assert_should_not_require_attribute(*attributes)
-			user_options = attributes.extract_options!
-			model = user_options[:model] || st_model_name
+			options = attributes.extract_options!
+			model = options[:model] || st_model_name
 			
 			attributes.each do |attr|
 				attr = attr.to_s
@@ -99,13 +99,13 @@ module SimplyTestable::Attributes
 			:assert_should_not_require_attribute
 
 		def assert_should_require_attribute_length(*attributes)
-			user_options = attributes.extract_options!
-			model = user_options[:model] || st_model_name
+			options = attributes.extract_options!
+			model = options[:model] || st_model_name
 			
 			attributes.each do |attr|
 				attr = attr.to_s
-				if user_options.keys.include?(:minimum)
-					min = user_options[:minimum]
+				if options.keys.include?(:minimum)
+					min = options[:minimum]
 					test "#{brand}should require min length of #{min} for #{attr}" do
 						assert_no_difference "#{model}.count" do
 							value = 'x'*(min-1)
@@ -116,8 +116,8 @@ module SimplyTestable::Attributes
 						end
 					end
 				end
-				if user_options.keys.include?(:maximum)
-					max = user_options[:maximum]
+				if options.keys.include?(:maximum)
+					max = options[:maximum]
 					test "#{brand}should require max length of #{max} for #{attr}" do
 						assert_no_difference "#{model}.count" do
 							value = 'x'*(max+1)
@@ -132,8 +132,8 @@ module SimplyTestable::Attributes
 		end
 
 		def assert_should_protect_attribute(*attributes)
-			user_options = attributes.extract_options!
-			model_name = user_options[:model] || st_model_name
+			options = attributes.extract_options!
+			model_name = options[:model] || st_model_name
 			model = model_name.constantize
 			
 			attributes.each do |attr|
@@ -154,8 +154,8 @@ module SimplyTestable::Attributes
 			:assert_should_protect_attribute
 
 		def assert_should_not_protect_attribute(*attributes)
-			user_options = attributes.extract_options!
-			model_name = user_options[:model] || st_model_name
+			options = attributes.extract_options!
+			model_name = options[:model] || st_model_name
 			model = model_name.constantize
 			
 			attributes.each do |attr|
