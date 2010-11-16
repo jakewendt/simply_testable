@@ -111,12 +111,15 @@ module SimplyTestable::Attributes
 				if options.keys.include?(:minimum)
 					min = options[:minimum]
 					test "#{brand}should require min length of #{min} for #{attr}" do
-						assert_difference "#{model}.count" do
+#	because the model may have other requirements
+#	just check to ensure that we don't get a :too_short error
+#						assert_difference "#{model}.count" do
 							value = 'x'*(min)
 							object = create_object(attr.to_sym => value)
 							assert_equal min, object.send(attr.to_sym).length
 							assert_equal object.send(attr.to_sym), value
-						end
+							assert !object.errors.on_attr_and_type(attr.to_sym, :too_short)
+#						end
 						assert_no_difference "#{model}.count" do
 							value = 'x'*(min-1)
 							object = create_object(attr.to_sym => value)
