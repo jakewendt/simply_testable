@@ -57,6 +57,8 @@ module SimplyTestable::Attributes
 		end
 		alias_method :assert_should_require_attributes_not_nil,
 			:assert_should_require_attribute_not_nil
+		alias_method :assert_should_require_not_nil,
+			:assert_should_require_attribute_not_nil
 
 		def assert_should_require_attribute(*attributes)
 			options = attributes.extract_options!
@@ -97,6 +99,8 @@ module SimplyTestable::Attributes
 		end
 		alias_method :assert_should_not_require_attributes, 
 			:assert_should_not_require_attribute
+		alias_method :assert_should_not_require, 
+			:assert_should_not_require_attribute
 
 		def assert_should_require_attribute_length(*attributes)
 			options = attributes.extract_options!
@@ -107,6 +111,12 @@ module SimplyTestable::Attributes
 				if options.keys.include?(:minimum)
 					min = options[:minimum]
 					test "#{brand}should require min length of #{min} for #{attr}" do
+						assert_difference "#{model}.count" do
+							value = 'x'*(min)
+							object = create_object(attr.to_sym => value)
+							assert_equal min, object.send(attr.to_sym).length
+							assert_equal object.send(attr.to_sym), value
+						end
 						assert_no_difference "#{model}.count" do
 							value = 'x'*(min-1)
 							object = create_object(attr.to_sym => value)
@@ -119,6 +129,12 @@ module SimplyTestable::Attributes
 				if options.keys.include?(:maximum)
 					max = options[:maximum]
 					test "#{brand}should require max length of #{max} for #{attr}" do
+						assert_difference "#{model}.count" do
+							value = 'x'*(max)
+							object = create_object(attr.to_sym => value)
+							assert_equal max, object.send(attr.to_sym).length
+							assert_equal object.send(attr.to_sym), value
+						end
 						assert_no_difference "#{model}.count" do
 							value = 'x'*(max+1)
 							object = create_object(attr.to_sym => value)
@@ -130,6 +146,10 @@ module SimplyTestable::Attributes
 				end
 			end
 		end
+		alias_method :assert_should_require_attributes_length,
+			:assert_should_require_attribute_length
+		alias_method :assert_should_require_length,
+			:assert_should_require_attribute_length
 
 		def assert_should_protect_attribute(*attributes)
 			options = attributes.extract_options!
@@ -152,6 +172,8 @@ module SimplyTestable::Attributes
 		end
 		alias_method :assert_should_protect_attributes, 
 			:assert_should_protect_attribute
+		alias_method :assert_should_protect, 
+			:assert_should_protect_attribute
 
 		def assert_should_not_protect_attribute(*attributes)
 			options = attributes.extract_options!
@@ -171,6 +193,8 @@ module SimplyTestable::Attributes
 			end
 		end
 		alias_method :assert_should_not_protect_attributes, 
+			:assert_should_not_protect_attribute
+		alias_method :assert_should_not_protect, 
 			:assert_should_not_protect_attribute
 
 	end
