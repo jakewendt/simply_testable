@@ -132,12 +132,15 @@ module SimplyTestable::Attributes
 				if options.keys.include?(:maximum)
 					max = options[:maximum]
 					test "#{brand}should require max length of #{max} for #{attr}" do
-						assert_difference "#{model}.count" do
+#	because the model may have other requirements
+#	just check to ensure that we don't get a :too_long error
+#						assert_difference "#{model}.count" do
 							value = 'x'*(max)
 							object = create_object(attr.to_sym => value)
 							assert_equal max, object.send(attr.to_sym).length
 							assert_equal object.send(attr.to_sym), value
-						end
+							assert !object.errors.on_attr_and_type(attr.to_sym, :too_long)
+#						end
 						assert_no_difference "#{model}.count" do
 							value = 'x'*(max+1)
 							object = create_object(attr.to_sym => value)
