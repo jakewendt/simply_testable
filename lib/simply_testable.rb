@@ -23,7 +23,10 @@ require 'simply_testable/pending'
 module ActiveSupport
 	module Testing
 		module AtExit
-			at_exit { puts Dir.pwd() }
+			at_exit { 
+				puts Dir.pwd() 
+				puts Time.now
+			}
 		end
 	end
 end
