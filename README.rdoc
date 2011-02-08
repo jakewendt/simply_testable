@@ -5,7 +5,6 @@ Contains a collection of complex assertions.
 == Usage
 
  config.gem 'jakewendt-simply_testable',
-   :lib    => 'simply_testable',
    :source => 'http://rubygems.org'
 
  script/generate simply_testable

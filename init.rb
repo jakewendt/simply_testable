@@ -1,1 +1,1 @@
-require 'simply_testable'
+require 'jakewendt-simply_testable'
