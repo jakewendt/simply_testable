@@ -105,9 +105,35 @@ module SimplyTestable::Attributes
 		def assert_should_require_attribute_length(*attributes)
 			options = attributes.extract_options!
 			model = options[:model] || st_model_name
+
+			if( ( options.keys & [:in,:within] ).length >= 1 )
+				range = options[:in]||options[:within]
+				options[:minimum] = range.min
+				options[:maximum] = range.max
+			end
 			
 			attributes.each do |attr|
 				attr = attr.to_s
+				if options.keys.include?(:is)
+					length = options[:is]
+					test "#{brand}should require exact length of #{length} for #{attr}" do
+						assert_no_difference "#{model}.count" do
+							value = 'x'*(length-1)
+							object = create_object(attr.to_sym => value)
+							assert_equal length-1, object.send(attr.to_sym).length
+							assert_equal object.send(attr.to_sym), value
+							assert object.errors.on_attr_and_type(attr.to_sym, :wrong_length)
+						end
+						assert_no_difference "#{model}.count" do
+							value = 'x'*(length+1)
+							object = create_object(attr.to_sym => value)
+							assert_equal length+1, object.send(attr.to_sym).length
+							assert_equal object.send(attr.to_sym), value
+							assert object.errors.on_attr_and_type(attr.to_sym, :wrong_length)
+						end
+					end
+				end
+
 				if options.keys.include?(:minimum)
 					min = options[:minimum]
 					test "#{brand}should require min length of #{min} for #{attr}" do
@@ -129,6 +155,7 @@ module SimplyTestable::Attributes
 						end
 					end
 				end
+
 				if options.keys.include?(:maximum)
 					max = options[:maximum]
 					test "#{brand}should require max length of #{max} for #{attr}" do
@@ -150,6 +177,7 @@ module SimplyTestable::Attributes
 						end
 					end
 				end
+
 			end
 		end
 		alias_method :assert_should_require_attributes_length,

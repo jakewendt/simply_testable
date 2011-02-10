@@ -4,4 +4,6 @@ class User < ActiveRecord::Base
 	validates_presence_of   :name
 	validates_length_of     :name, :in => 5..250
 	validates_uniqueness_of :name
+	validates_presence_of   :zip_code
+	validates_length_of     :zip_code, :is => 5
 end

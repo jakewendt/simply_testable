@@ -16,4 +16,5 @@ Factory.define :vendor do |f|
 end
 Factory.define :user do |f|
 	f.sequence(:name) { |n| "Name #{n}" }
+	f.sequence(:zip_code) { |n| sprintf("%05d",n) }
 end
