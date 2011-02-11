@@ -14,12 +14,12 @@ Rails::Initializer.run do |config|
 	config.gem 'thoughtbot-factory_girl',
 		:lib => 'factory_girl'
 
+	config.gem 'jakewendt-html_test'
+
 	config.plugin_paths = [
-		File.expand_path(File.join(File.dirname(__FILE__),'../..')),
-		File.expand_path(File.join(File.dirname(__FILE__),'../../..','peter'))
+		File.expand_path(File.join(File.dirname(__FILE__),'../..'))
 	]
-	config.plugins = [ :simply_testable, 
-		:html_test, :html_test_extension]
+	config.plugins = [ :simply_testable ]
 
 	config.frameworks -= [:active_resource]
 
