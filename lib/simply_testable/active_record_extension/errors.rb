@@ -1,5 +1,6 @@
-module SimplyTestable::Errors
+module SimplyTestable::ActiveRecordExtension::Errors
 	def self.included(base)
+		base.extend(ClassMethods)
 		base.send(:include,InstanceMethods)
 	end
 	module InstanceMethods
@@ -9,6 +10,11 @@ module SimplyTestable::Errors
 			@errors[attribute].collect(&:type).include?(type)
 		end
 	end
-end	#	SimplyTestable::Errors
+	module ClassMethods
+		def delete(key)
+			@errors.delete(key.to_s)
+		end
+	end
+end	#	SimplyTestable::ActiveRecordExtension::Errors
 ActiveRecord::Errors.send(:include,
-	SimplyTestable::Errors)
+	SimplyTestable::ActiveRecordExtension::Errors)

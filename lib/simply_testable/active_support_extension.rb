@@ -1,42 +1,11 @@
-module SimplyTestable::Declarative
-
-	def self.included(base)
-		base.extend ClassMethods
-		base.class_eval do
-			class << self
-				alias_method_chain :test, :verbosity
-			end
-		end
-	end
-
-	module ClassMethods
-
-		def test_with_verbosity(name,&block)
-			test_without_verbosity(name,&block)
-
-			test_name = "test_#{name.gsub(/\s+/,'_')}".to_sym
-			define_method("_#{test_name}_with_verbosity") do
-				print "\n#{self.class.name.gsub(/Test$/,'').titleize} #{name}: "
-				send("_#{test_name}_without_verbosity")
-			end
-			#
-			#	can't do this.  
-			#		alias_method_chain test_name, :verbosity
-			#	end up with 2 methods that begin
-			#	with 'test_' so they both get run
-			#
-			alias_method "_#{test_name}_without_verbosity".to_sym,
-				test_name
-			alias_method test_name,
-				"_#{test_name}_with_verbosity".to_sym
-		end
-
-	end	#	ClassMethods
-
-end
 require 'active_support'
 require 'active_support/test_case'
-ActiveSupport::TestCase.send(:include,SimplyTestable::Declarative)
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+require 'active_support_extension/test_case'
+require 'active_support_extension/associations'
+require 'active_support_extension/attributes'
+require 'active_support_extension/pending'
+
 
 Rails.backtrace_cleaner.add_silencer {|line|
 #	line =~ /\/test\/.*\.\.\/declarative\.rb:/
@@ -53,5 +22,8 @@ Rails.backtrace_cleaner.add_silencer {|line|
 
 #	This doesn't seem to work at all in the plugin engine.
 #	line =~ /test.*\/declarative\.rb:/
-	line =~ /simply_testable\/declarative\.rb:/
+#	line =~ /simply_testable\/declarative\.rb:/
+
+#	Return true or false.  Need to collect if adding multiple conditions.
+	line =~ /simply_testable\/active_support_extension\/test_case\.rb:/
 } if defined? Rails 

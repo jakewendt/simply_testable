@@ -19,8 +19,8 @@ begin
 	require 'jeweler'
 	Jeweler::Tasks.new do |gem|
 		gem.name = "jakewendt-simply_testable"
-		gem.summary = %Q{one-line summary of your gem}
-		gem.description = %Q{longer description of your gem}
+		gem.summary = %Q{Validations and assertions}
+		gem.description = %Q{Collection of validations and complex assertions}
 		gem.email = "github@jake.otherinbox.com"
 		gem.homepage = "http://github.com/jakewendt/simply_testable"
 		gem.authors = ["Jake"]

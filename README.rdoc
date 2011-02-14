@@ -1,6 +1,6 @@
 = Simply Testable (RubyGem)
 
-Contains a collection of complex assertions.
+Contains a collection of validations and complex assertions.
 
 == Usage
 

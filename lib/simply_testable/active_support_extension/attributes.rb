@@ -1,4 +1,4 @@
-module SimplyTestable::Attributes
+module SimplyTestable::ActiveSupportExtension::Attributes
 
 	def self.included(base)
 		base.extend ClassMethods
@@ -234,7 +234,7 @@ module SimplyTestable::Attributes
 	end
 
 end	# module SimplyTestable::Attributes
-require 'active_support'
-require 'active_support/test_case'
+#require 'active_support'
+#require 'active_support/test_case'
 ActiveSupport::TestCase.send(:include,
-	SimplyTestable::Attributes)
+	SimplyTestable::ActiveSupportExtension::Attributes)
